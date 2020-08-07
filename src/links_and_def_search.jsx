@@ -64,7 +64,7 @@ const Link = ({ doc }) => (
             {doc.tags.map((tag, i) =>
                 <Tag key={tag} tag={tag} index={i} color={stringToColour(tag)} />)}
         </div>
-        <div style={{marginTop:"3px"}}>
+        <div style={{ marginTop: "3px" }}>
             <a href={doc.link}>{doc.link}</a>
         </div>
     </div>
@@ -84,6 +84,7 @@ class SearchField extends React.Component {
         }
         const searchString = event.target.value.trim() == "" ? ""
             : "+*" + event.target.value.trim().replace(/\s+/g, "* +*") + "*"
+
         this.setState({
             value: event.target.value,
             result: searchString == this.state.searchString ?
@@ -92,11 +93,11 @@ class SearchField extends React.Component {
             searchString
         });
     }
-    
+
     handleKeyDown(event) {
         if (event.keyCode == 27) { // ESC
             event.preventDefault()
-            this.setState({value:"", result:[], searchString:this.state.searchString})
+            this.setState({ value: "", result: [], searchString: "" })
         }
     }
 

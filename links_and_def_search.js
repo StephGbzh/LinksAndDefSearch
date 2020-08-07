@@ -121,6 +121,7 @@ var SearchField = function (_React$Component) {
                 return;
             }
             var searchString = event.target.value.trim() == "" ? "" : "+*" + event.target.value.trim().replace(/\s+/g, "* +*") + "*";
+
             this.setState({
                 value: event.target.value,
                 result: searchString == this.state.searchString ? this.state.result : searchString == "" ? [] : idx.search(searchString),
@@ -133,7 +134,7 @@ var SearchField = function (_React$Component) {
             if (event.keyCode == 27) {
                 // ESC
                 event.preventDefault();
-                this.setState({ value: "", result: [], searchString: this.state.searchString });
+                this.setState({ value: "", result: [], searchString: "" });
             }
         }
     }, {

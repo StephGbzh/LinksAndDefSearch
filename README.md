@@ -1,7 +1,9 @@
 # Overview
 
-- Static single page with search capability
+- Static single page with search-as-you-type capability
 - POC (ie this very repository) runs on Github-Pages at https://stephgbzh.github.io/LinksAndDefSearch/
+  - type * in the search field to see all results
+  - type ESC in the search field to clear it 
 - Data is set in data.js, any change is reflected upon refresh (F5) of the HTML page (give Github a few seconds to automatically deploy the new version)
 - Locally the page to open is simply index.html
 - Powered by [Lunr](https://lunrjs.com/) and [React](https://reactjs.org/)
