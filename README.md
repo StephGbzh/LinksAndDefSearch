@@ -152,3 +152,6 @@ Create a folder `src` and start the automatic watcher:
 [Minification of js files for production](https://gist.github.com/gaearon/42a2ffa41b8319948f9be4076286e1f3)
 
 # [Adding an existing project to Github](https://docs.github.com/en/github/importing-your-projects-to-github/adding-an-existing-project-to-github-using-the-command-line)
+
+# [Favicon](https://favicon.io/emoji-favicons/magnifying-glass-tilted-right/)
+
