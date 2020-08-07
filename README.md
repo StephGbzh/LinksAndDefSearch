@@ -1,11 +1,13 @@
 # Overview
 
-- Static single page with search capability.
-- Powered by Lunr and React.
-- Data is set in data.js
+- Static single page with search capability
+- POC (ie this very repository) runs on Github-Pages at https://stephgbzh.github.io/LinksAndDefSearch/
+- Data is set in data.js, any change is reflected upon refresh (F5) of the HTML page (give Github a few seconds to automatically deploy the new version)
+- Locally the page to open is simply index.html
+- Powered by [Lunr](https://lunrjs.com/) and [React](https://reactjs.org/)
 - Source code is in src/links_and_def_search.jsx
-- Babel through npx transforms this code to plain js
-- The page to open is single-page.html
+- Babel through npx transforms this jsx code to plain js (see further below for the exact command)
+- Tested with only small amounts of data
 
 # JS Search Engines
 
@@ -32,8 +34,9 @@ Pros:
 - fuzzy search
 
 Cons:
-- slower ? not sure the benchmarks were made against v2.x
+- slower ? not sure, the benchmarks were made against v2.x
 - indexes are immutable => no add/update/delete
+- need to tweak with worse perf to access reliable wildcard + "AND" functionalities [link](https://github.com/olivernn/lunr.js/issues/377#issuecomment-426380071)
 
 
 [How to generate search result from lunr.js](https://github.com/Pelican-Elegant/elegant/issues/275#issuecomment-580791143)
@@ -50,6 +53,9 @@ Lightweight full-text search engine in Javascript for browser search and offline
 Elasticlunr.js is a lightweight full-text search engine in Javascript for browser search and offline search. Elasticlunr.js is developed based on Lunr.js, but more flexible than lunr.js. Elasticlunr.js provides Query-Time boosting and field search. Elasticlunr.js is a bit like Solr, but much smaller and not as bright, but also provide flexible configuration and query-time boosting.
 
 Elasticlunr.js use quite the same scoring mechanism as Elasticsearch
+
+Pros:
+- faster than lunr
 
 Cons:
 - [no wildcard search](https://github.com/weixsong/elasticlunr.js/issues/81), only suffixes: micro will get microservice and microcosm but NOT minimicro
@@ -77,12 +83,18 @@ It might not make sense for every situation, but can be ideal depending on your 
 Pros:
 - still maintained
 
+Cons:
+- not really looked into it
+
 ## [search-index](https://github.com/fergiemcdowall/search-index)
 
 A network resilient, persistent full-text search library for the browser and Node.js
 
 Pros:
 - still maintained
+
+Cons:
+- not really looked into it
 
 ## [js-search](https://github.com/bvaughn/js-search)
 
@@ -96,12 +108,15 @@ Pros:
 - still maintained
 - search by prefix or substring or exact word
 
+Cons:
+- not really looked into it
+
 ## [flexsearch](https://github.com/nextapps-de/flexsearch)
 
 Next-Generation full text search library for Browser and Node.js
 
 Pros:
-- fastest one
+- fastest one (self proclaimed though)
 
 Cons:
 - [not maintained](https://github.com/nextapps-de/flexsearch/issues/150) anymore since Nov 2019
