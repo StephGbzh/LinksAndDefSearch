@@ -13,5 +13,8 @@ const documents =
 }, {
     "link": "https://www.ecosia.org",
     "tags": ["search", "ecology"]
+}, {
+    "link": "https://www.bing.com",
+    "tags": ["search", "microsoft"]
 }
 ]
