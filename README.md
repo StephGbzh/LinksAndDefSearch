@@ -1,3 +1,12 @@
+# Overview
+
+- Static single page with search capability.
+- Powered by Lunr and React.
+- Data is set in data.js
+- Source code is in src/links_and_def_search.jsx
+- Babel through npx transforms this code to plain js
+- The page to open is single-page.html
+
 # JS Search Engines
 
 ## [LUNR](https://lunrjs.com/)
@@ -124,3 +133,5 @@ Create a folder `src` and start the automatic watcher:
 `npx babel --watch src --out-dir . --presets react-app/prod`
 
 [Minification of js files for production](https://gist.github.com/gaearon/42a2ffa41b8319948f9be4076286e1f3)
+
+# [Adding an existing project to Github](https://docs.github.com/en/github/importing-your-projects-to-github/adding-an-existing-project-to-github-using-the-command-line)
