@@ -4,8 +4,9 @@ const store = {}
 
 var idx = lunr(function () {
     this.ref('key')
-    Object.keys(fields).forEach((field) => {
-        this.field(field)
+    // https://lunrjs.com/docs/lunr.Builder.html#field
+    Object.entries(fields).forEach(([field, attributes]) => {
+        this.field(field, attributes)
     })
 
     // remove the stemmer as it breaks some wildcard searches
@@ -61,7 +62,7 @@ const Tag = ({ tag, index, color }) => (
 
 const Result = ({ doc }) => (
     <div style={{ margin: "20px auto", width: "60%" }}>
-        {Object.entries(fields).map(([field, type]) => {
+        {Object.entries(fields).map(([field, {type}]) => {
             switch (type) {
                 case "list":
                     return <div style={{ display: "inline-flex" }}>

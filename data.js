@@ -1,11 +1,12 @@
 // list the fields to take into account for the search
-// the fields order is used to show each result and can be different from the one in "documents"
+// the fields order is used to display each result and can be different from the one in "documents"
 // the type of each field will determine how it is displayed
+// the importance of a field can be tweaked through the "boost" value, default is 1
 const fields =
 {
-    "title": "text",
-    "link": "link",
-    "tags": "list",
+    "title": { "type": "text" },
+    "link": { "type": "link" },
+    "tags": { "type": "list", "boost": 10 },
 }
 
 const documents =

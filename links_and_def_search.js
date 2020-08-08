@@ -16,8 +16,13 @@ var idx = lunr(function () {
     var _this = this;
 
     this.ref('key');
-    Object.keys(fields).forEach(function (field) {
-        _this.field(field);
+    // https://lunrjs.com/docs/lunr.Builder.html#field
+    Object.entries(fields).forEach(function (_ref) {
+        var _ref2 = _slicedToArray(_ref, 2),
+            field = _ref2[0],
+            attributes = _ref2[1];
+
+        _this.field(field, attributes);
     });
 
     // remove the stemmer as it breaks some wildcard searches
@@ -50,10 +55,10 @@ var stringToColour = function stringToColour(str) {
     return colour;
 };
 
-var Tag = function Tag(_ref) {
-    var tag = _ref.tag,
-        index = _ref.index,
-        color = _ref.color;
+var Tag = function Tag(_ref3) {
+    var tag = _ref3.tag,
+        index = _ref3.index,
+        color = _ref3.color;
     return React.createElement(
         'div',
         { style: {
@@ -79,15 +84,15 @@ var Tag = function Tag(_ref) {
     );
 };
 
-var Result = function Result(_ref2) {
-    var doc = _ref2.doc;
+var Result = function Result(_ref4) {
+    var doc = _ref4.doc;
     return React.createElement(
         'div',
         { style: { margin: "20px auto", width: "60%" } },
-        Object.entries(fields).map(function (_ref3) {
-            var _ref4 = _slicedToArray(_ref3, 2),
-                field = _ref4[0],
-                type = _ref4[1];
+        Object.entries(fields).map(function (_ref5) {
+            var _ref6 = _slicedToArray(_ref5, 2),
+                field = _ref6[0],
+                type = _ref6[1].type;
 
             switch (type) {
                 case "list":
