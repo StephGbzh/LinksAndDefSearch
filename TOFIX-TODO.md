@@ -18,7 +18,7 @@
 
 :white_large_square: Add a section in README: How to develop => npx line
 
-:white_check_mark: Add boost to tags
+:white_check_mark: Add possibility to add boost to fields
 
 <!--
 Markdown emojis:
