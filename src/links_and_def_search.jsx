@@ -84,7 +84,7 @@ const Result = ({ doc }) => (
 class SearchField extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { value: '', result: [], searchString: "" };
+        this.state = { value: '', result: idx.search("*"), searchString: "" };
         this.handleChange = this.handleChange.bind(this);
         this.handleKeyDown = this.handleKeyDown.bind(this);
     }
@@ -100,7 +100,7 @@ class SearchField extends React.Component {
             value: event.target.value,
             result: searchString == this.state.searchString ?
                 this.state.result :
-                searchString == "" ? [] : idx.search(searchString),
+                searchString == "" ? idx.search("*") : idx.search(searchString),
             searchString
         });
     }
@@ -108,7 +108,7 @@ class SearchField extends React.Component {
     handleKeyDown(event) {
         if (event.keyCode == 27) { // ESC
             event.preventDefault()
-            this.setState({ value: "", result: [], searchString: "" })
+            this.setState({ value: "", result: idx.search("*"), searchString: "" })
         }
     }
 

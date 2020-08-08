@@ -12,7 +12,7 @@
 
 :white_large_square: Test with more data
 
-:white_large_square: Show a full page of results when no search string is entered
+:white_check_mark: Show a full page of results when no search string is entered
 
 :white_large_square: Limit number of results shown at once (+ pagination?)
 

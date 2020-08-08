@@ -136,7 +136,7 @@ var SearchField = function (_React$Component) {
 
         var _this2 = _possibleConstructorReturn(this, (SearchField.__proto__ || Object.getPrototypeOf(SearchField)).call(this, props));
 
-        _this2.state = { value: '', result: [], searchString: "" };
+        _this2.state = { value: '', result: idx.search("*"), searchString: "" };
         _this2.handleChange = _this2.handleChange.bind(_this2);
         _this2.handleKeyDown = _this2.handleKeyDown.bind(_this2);
         return _this2;
@@ -152,7 +152,7 @@ var SearchField = function (_React$Component) {
 
             this.setState({
                 value: event.target.value,
-                result: searchString == this.state.searchString ? this.state.result : searchString == "" ? [] : idx.search(searchString),
+                result: searchString == this.state.searchString ? this.state.result : searchString == "" ? idx.search("*") : idx.search(searchString),
                 searchString: searchString
             });
         }
@@ -162,7 +162,7 @@ var SearchField = function (_React$Component) {
             if (event.keyCode == 27) {
                 // ESC
                 event.preventDefault();
-                this.setState({ value: "", result: [], searchString: "" });
+                this.setState({ value: "", result: idx.search("*"), searchString: "" });
             }
         }
     }, {
