@@ -16,6 +16,8 @@
 
 :white_large_square: Limit number of results shown at once (+ pagination?)
 
+:white_large_square: Add a section in README: How to develop => npx line
+
 <!--
 Markdown emojis:
 :white_large_square: :white_check_mark: :x:
