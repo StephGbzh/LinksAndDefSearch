@@ -11,6 +11,33 @@
 - Babel through npx transforms this jsx code to plain js (see further below for the exact command)
 - Tested with only small amounts of data
 
+# How to use
+
+The present repo is a demo with some (small amount of) arbitrary data. You will need to clone or fork it to customize the data you want to be searchable.
+
+## Locally
+
+1. Clone the repository, you will need these files:
+    - index.html
+    - data.js
+    - links_and_def_search.js
+    - libs/lunr@2.3.8.min.js
+    - libs/react@16.13.1.production.min.js
+    - libs/react-dom@16.13.1.production.min.js
+    - favicon.ico (optional)
+
+1. Modify data.js to put the data you are interested in
+1. Open index.html in your browser
+1. Start searching !
+
+## Hosted on GitHub
+
+1. Fork the repository.
+1. Modify data.js to put the data you are interested in
+1. Go to your repo Settings > Options > GitHub Pages > Source: choose branch = master and folder = / (root)
+1. This will create a website hosted on GitHub (you may need a small delay for it to be created + a refresh of the page to get the address)
+1. Access this site and start searching ! 
+
 # JS Search Engines
 
 ## [LUNR](https://lunrjs.com/)
