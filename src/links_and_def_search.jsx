@@ -4,8 +4,9 @@ const store = {}
 
 var idx = lunr(function () {
     this.ref('key')
-    this.field('link')
-    this.field('tags')
+    Object.keys(fields).forEach((field) => {
+        this.field(field)
+    })
 
     // remove the stemmer as it breaks some wildcard searches
     // the performance will be worse but no big deal as long as we don't have too much data
@@ -58,15 +59,25 @@ const Tag = ({ tag, index, color }) => (
     </div>
 )
 
-const Link = ({ doc }) => (
-    <div style={{ margin: "10px auto", width: "60%" }}>
-        <div style={{ display: "inline-flex" }}>
-            {doc.tags.map((tag, i) =>
-                <Tag key={tag} tag={tag} index={i} color={stringToColour(tag)} />)}
-        </div>
-        <div style={{ marginTop: "3px" }}>
-            <a href={doc.link}>{doc.link}</a>
-        </div>
+const Result = ({ doc }) => (
+    <div style={{ margin: "20px auto", width: "60%" }}>
+        {Object.entries(fields).map(([field, type]) => {
+            switch (type) {
+                case "list":
+                    return <div style={{ display: "inline-flex" }}>
+                        {doc[field].map((tag, i) =>
+                            <Tag key={tag} tag={tag} index={i} color={stringToColour(tag)} />)}
+                    </div>
+                case "link":
+                    return <div style={{ margin: "3px 0" }}>
+                        <a href={doc[field]}>{doc[field]}</a>
+                    </div>
+                case "text":
+                    return <div>{doc[field]}</div>
+                default:
+                    return <div>Field "{field}" of unknown type: {type}</div>
+            }
+        })}
     </div>
 )
 
@@ -113,7 +124,7 @@ class SearchField extends React.Component {
                 </form>
                 <br></br>
 
-                {this.state.result.map((r) => { return (<Link key={r.ref} doc={store[r.ref]} />) })}
+                {this.state.result.map((r) => { return (<Result key={r.ref} doc={store[r.ref]} />) })}
 
             </div>
         );
