@@ -61,7 +61,7 @@ const Tag = ({ tag, index, color }) => (
 )
 
 const Result = ({ doc }) => (
-    <div style={{ margin: "20px auto", width: "60%" }}>
+    <div style={{ margin: "20px auto" }}>
         {Object.entries(fields).map(([field, {type}]) => {
             switch (type) {
                 case "list":
@@ -116,7 +116,7 @@ class SearchField extends React.Component {
     render() {
         return (
             <div>
-                <form style={{ margin: "0 auto", width: "60%" }}>
+                <form style={{ margin: "0 auto" }}>
                     <label>
                         <input type="text" value={this.state.value} onChange={this.handleChange} onKeyDown={this.handleKeyDown}
                             style={{ width: "100%", lineHeight: "40px", fontSize: "large" }}

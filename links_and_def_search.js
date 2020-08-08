@@ -88,7 +88,7 @@ var Result = function Result(_ref4) {
     var doc = _ref4.doc;
     return React.createElement(
         'div',
-        { style: { margin: "20px auto", width: "60%" } },
+        { style: { margin: "20px auto" } },
         Object.entries(fields).map(function (_ref5) {
             var _ref6 = _slicedToArray(_ref5, 2),
                 field = _ref6[0],
@@ -178,7 +178,7 @@ var SearchField = function (_React$Component) {
                 null,
                 React.createElement(
                     'form',
-                    { style: { margin: "0 auto", width: "60%" } },
+                    { style: { margin: "0 auto" } },
                     React.createElement(
                         'label',
                         null,
