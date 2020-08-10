@@ -133,7 +133,7 @@ var Result = function Result(_ref4) {
     );
 };
 
-var maxResultsDefault = 10;
+var MAX_RESULTS_DEFAULT = 10;
 
 var SearchField = function (_React$Component) {
     _inherits(SearchField, _React$Component);
@@ -143,7 +143,7 @@ var SearchField = function (_React$Component) {
 
         var _this2 = _possibleConstructorReturn(this, (SearchField.__proto__ || Object.getPrototypeOf(SearchField)).call(this, props));
 
-        _this2.state = { value: '', result: idx.search("*"), searchString: "", maxResults: maxResultsDefault };
+        _this2.state = { value: '', result: idx.search("*"), searchString: "", maxResults: MAX_RESULTS_DEFAULT };
         _this2.handleChange = _this2.handleChange.bind(_this2);
         _this2.handleKeyDown = _this2.handleKeyDown.bind(_this2);
         _this2.handleMoreClick = _this2.handleMoreClick.bind(_this2);
@@ -161,7 +161,7 @@ var SearchField = function (_React$Component) {
             this.setState({
                 value: event.target.value,
                 result: searchString == this.state.searchString ? this.state.result : searchString == "" ? idx.search("*") : idx.search(searchString),
-                maxResults: maxResultsDefault
+                maxResults: MAX_RESULTS_DEFAULT
             });
         }
     }, {
@@ -170,14 +170,14 @@ var SearchField = function (_React$Component) {
             if (event.keyCode == 27) {
                 // ESC
                 event.preventDefault();
-                this.setState({ value: "", result: idx.search("*"), searchString: "", maxResults: maxResultsDefault });
+                this.setState({ value: "", result: idx.search("*"), searchString: "", maxResults: MAX_RESULTS_DEFAULT });
             }
         }
     }, {
         key: 'handleMoreClick',
         value: function handleMoreClick(event) {
             event.preventDefault();
-            this.setState({ maxResults: this.state.maxResults + 5 });
+            this.setState({ maxResults: this.state.maxResults + MAX_RESULTS_DEFAULT });
         }
     }, {
         key: 'render',
@@ -201,9 +201,9 @@ var SearchField = function (_React$Component) {
                     return React.createElement(Result, { key: r.ref, doc: store[r.ref] });
                 }),
                 this.state.result.length > this.state.maxResults ? React.createElement(
-                    'a',
-                    { href: '#', onClick: this.handleMoreClick },
-                    'Load More results'
+                    'button',
+                    { onClick: this.handleMoreClick },
+                    'Load more results'
                 ) : null
             );
         }

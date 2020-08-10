@@ -82,12 +82,12 @@ const Result = ({ doc }) => (
     </div>
 )
 
-var maxResultsDefault = 10
+const MAX_RESULTS_DEFAULT = 10
 
 class SearchField extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { value: '', result: idx.search("*"), searchString: "", maxResults: maxResultsDefault };
+        this.state = { value: '', result: idx.search("*"), searchString: "", maxResults: MAX_RESULTS_DEFAULT };
         this.handleChange = this.handleChange.bind(this);
         this.handleKeyDown = this.handleKeyDown.bind(this);
         this.handleMoreClick = this.handleMoreClick.bind(this);
@@ -105,20 +105,20 @@ class SearchField extends React.Component {
             result: searchString == this.state.searchString ?
                 this.state.result :
                 searchString == "" ? idx.search("*") : idx.search(searchString),
-            maxResults: maxResultsDefault
+            maxResults: MAX_RESULTS_DEFAULT
         });
     }
 
     handleKeyDown(event) {
         if (event.keyCode == 27) { // ESC
             event.preventDefault()
-            this.setState({ value: "", result: idx.search("*"), searchString: "", maxResults: maxResultsDefault })
+            this.setState({ value: "", result: idx.search("*"), searchString: "", maxResults: MAX_RESULTS_DEFAULT })
         }
     }
 
     handleMoreClick(event) {
         event.preventDefault()
-        this.setState({ maxResults: this.state.maxResults + 5 })
+        this.setState({ maxResults: this.state.maxResults + MAX_RESULTS_DEFAULT })
     }
 
     render() {
@@ -138,7 +138,7 @@ class SearchField extends React.Component {
                 )}
 
                 {this.state.result.length > this.state.maxResults ?
-                    <a href="#" onClick={this.handleMoreClick}>Load More results</a> : null}
+                    <button onClick={this.handleMoreClick}>Load more results</button> : null}
 
             </div>
         );
