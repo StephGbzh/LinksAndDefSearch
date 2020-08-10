@@ -129,8 +129,7 @@ class SearchField extends React.Component {
                 )}
 
                 {this.state.result.length > this.state.maxResults ?
-                    <button onClick={this.handleMoreClick}>Load more results</button> : null}
-
+                    <button class="load-more" onClick={this.handleMoreClick}>Load more results</button> : null}
             </div>
         );
     }

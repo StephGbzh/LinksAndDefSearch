@@ -193,7 +193,7 @@ var SearchField = function (_React$Component) {
                 }),
                 this.state.result.length > this.state.maxResults ? React.createElement(
                     'button',
-                    { onClick: this.handleMoreClick },
+                    { 'class': 'load-more', onClick: this.handleMoreClick },
                     'Load more results'
                 ) : null
             );

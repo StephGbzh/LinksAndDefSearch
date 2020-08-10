@@ -59,3 +59,8 @@ span.tag-text
     margin-left: 2px;
     margin-right: 2px;
 }
+
+button.load-more
+{
+    font-size: medium;
+}
