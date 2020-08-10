@@ -16,7 +16,7 @@ form
 
 input
 {
-    width: 350px;
+    width: 100%;
     line-height: 40px;
     font-size: large;
 }
