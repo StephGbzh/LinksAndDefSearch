@@ -1,0 +1,56 @@
+html
+{
+    overflow-y: scroll;
+}
+
+body
+{
+    max-width: 950px;
+    margin: 5px auto;
+}
+
+form
+{
+    margin: 0 auto;
+}
+
+input
+{
+    width: 100%;
+    line-height: 40px;
+    font-size: large;
+}
+
+div.result
+{
+    margin: 20px auto;
+}
+
+div.result-list
+{
+    display: inline-flex;
+}
+
+div.result-link
+{
+    margin: 3px 0;
+}
+
+div.tag
+{
+    border-radius: 5px;
+}
+
+span.tag-dot
+{
+    width: 10px;
+    height: 10px;
+    margin-left: 2px;
+    display: inline-block;
+}
+
+span.tag-text
+{
+    margin-left: 2px;
+    margin-right: 2px;
+}

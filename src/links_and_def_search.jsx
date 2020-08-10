@@ -41,36 +41,28 @@ const stringToColour = (str) => {
 }
 
 const Tag = ({ tag, index, color }) => (
-    <div style={{
+    <div class="tag" style={{
         border: "thin solid " + color,
-        borderRadius: "5px",
         marginLeft: (index == 0 ? "0" : "2px")
     }}>
-        <span style={{
-            width: "10px",
-            height: "10px",
-            marginLeft: "2px",
-            display: "inline-block",
+        <span class="tag-dot" style={{
             backgroundColor: color
         }}></span>
-        <span style={{
-            marginLeft: "2px",
-            marginRight: "2px"
-        }}>{tag}</span>
+        <span class="tag-text">{tag}</span>
     </div>
 )
 
 const Result = ({ doc }) => (
-    <div style={{ margin: "20px auto" }}>
+    <div class="result">
         {Object.entries(fields).map(([field, { type }]) => {
             switch (type) {
                 case "list":
-                    return <div style={{ display: "inline-flex" }}>
+                    return <div class="result-list">
                         {doc[field].map((tag, i) =>
                             <Tag key={tag} tag={tag} index={i} color={stringToColour(tag)} />)}
                     </div>
                 case "link":
-                    return <div style={{ margin: "3px 0" }}>
+                    return <div class="result-link">
                         <a href={doc[field]} target="_blank">{doc[field]}</a>
                     </div>
                 case "text":
@@ -124,10 +116,9 @@ class SearchField extends React.Component {
     render() {
         return (
             <div>
-                <form style={{ margin: "0 auto" }}>
+                <form>
                     <label>
                         <input type="text" value={this.state.value} onChange={this.handleChange} onKeyDown={this.handleKeyDown}
-                            style={{ width: "100%", lineHeight: "40px", fontSize: "large" }}
                             placeholder="search" />
                     </label>
                 </form>

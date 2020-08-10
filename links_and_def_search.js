@@ -61,24 +61,16 @@ var Tag = function Tag(_ref3) {
         color = _ref3.color;
     return React.createElement(
         'div',
-        { style: {
+        { 'class': 'tag', style: {
                 border: "thin solid " + color,
-                borderRadius: "5px",
                 marginLeft: index == 0 ? "0" : "2px"
             } },
-        React.createElement('span', { style: {
-                width: "10px",
-                height: "10px",
-                marginLeft: "2px",
-                display: "inline-block",
+        React.createElement('span', { 'class': 'tag-dot', style: {
                 backgroundColor: color
             } }),
         React.createElement(
             'span',
-            { style: {
-                    marginLeft: "2px",
-                    marginRight: "2px"
-                } },
+            { 'class': 'tag-text' },
             tag
         )
     );
@@ -88,7 +80,7 @@ var Result = function Result(_ref4) {
     var doc = _ref4.doc;
     return React.createElement(
         'div',
-        { style: { margin: "20px auto" } },
+        { 'class': 'result' },
         Object.entries(fields).map(function (_ref5) {
             var _ref6 = _slicedToArray(_ref5, 2),
                 field = _ref6[0],
@@ -98,7 +90,7 @@ var Result = function Result(_ref4) {
                 case "list":
                     return React.createElement(
                         'div',
-                        { style: { display: "inline-flex" } },
+                        { 'class': 'result-list' },
                         doc[field].map(function (tag, i) {
                             return React.createElement(Tag, { key: tag, tag: tag, index: i, color: stringToColour(tag) });
                         })
@@ -106,7 +98,7 @@ var Result = function Result(_ref4) {
                 case "link":
                     return React.createElement(
                         'div',
-                        { style: { margin: "3px 0" } },
+                        { 'class': 'result-link' },
                         React.createElement(
                             'a',
                             { href: doc[field], target: '_blank' },
@@ -187,12 +179,11 @@ var SearchField = function (_React$Component) {
                 null,
                 React.createElement(
                     'form',
-                    { style: { margin: "0 auto" } },
+                    null,
                     React.createElement(
                         'label',
                         null,
                         React.createElement('input', { type: 'text', value: this.state.value, onChange: this.handleChange, onKeyDown: this.handleKeyDown,
-                            style: { width: "100%", lineHeight: "40px", fontSize: "large" },
                             placeholder: 'search' })
                     )
                 ),
