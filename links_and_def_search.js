@@ -176,7 +176,7 @@ var SearchField = function (_React$Component) {
         value: function render() {
             return React.createElement(
                 'div',
-                null,
+                { 'class': 'main' },
                 React.createElement(
                     'form',
                     null,

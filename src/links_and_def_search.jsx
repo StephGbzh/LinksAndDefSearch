@@ -115,7 +115,7 @@ class SearchField extends React.Component {
 
     render() {
         return (
-            <div>
+            <div class="main">
                 <form>
                     <label>
                         <input type="text" value={this.state.value} onChange={this.handleChange} onKeyDown={this.handleKeyDown}
