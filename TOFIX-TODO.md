@@ -18,13 +18,15 @@
 
 :x: Minify main js file ? No, the size is ridiculous compared to the minified react-dom js (9 kB vs 116 kB)
 
-:black_square_button: Rename project: simple search page for custom data
+:heavy_check_mark: Rename project: simple search page for custom data
 
 :black_square_button: Test with more data
 
 :black_square_button: Search bar always visible even when scrolling
 
 :black_square_button: Clear button in/over the input (an "X")
+
+:black_square_button: Remove React => Vue.js ? No framework ? (and bring back minify subject...)
 
 <!--
 Markdown emojis:
