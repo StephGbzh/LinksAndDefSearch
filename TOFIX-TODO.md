@@ -14,7 +14,7 @@
 
 :white_check_mark: Show a full page of results when no search string is entered
 
-:white_large_square: Limit number of results shown at once (+ pagination?)
+:white_check_mark: Limit number of results shown at once (+ pagination)
 
 :white_large_square: Add a section in README: How to develop => npx line
 

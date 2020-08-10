@@ -62,7 +62,7 @@ const Tag = ({ tag, index, color }) => (
 
 const Result = ({ doc }) => (
     <div style={{ margin: "20px auto" }}>
-        {Object.entries(fields).map(([field, {type}]) => {
+        {Object.entries(fields).map(([field, { type }]) => {
             switch (type) {
                 case "list":
                     return <div style={{ display: "inline-flex" }}>
@@ -71,7 +71,7 @@ const Result = ({ doc }) => (
                     </div>
                 case "link":
                     return <div style={{ margin: "3px 0" }}>
-                        <a href={doc[field]}>{doc[field]}</a>
+                        <a href={doc[field]} target="_blank">{doc[field]}</a>
                     </div>
                 case "text":
                     return <div>{doc[field]}</div>
@@ -82,12 +82,15 @@ const Result = ({ doc }) => (
     </div>
 )
 
+var maxResultsDefault = 10
+
 class SearchField extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { value: '', result: idx.search("*"), searchString: "" };
+        this.state = { value: '', result: idx.search("*"), searchString: "", maxResults: maxResultsDefault };
         this.handleChange = this.handleChange.bind(this);
         this.handleKeyDown = this.handleKeyDown.bind(this);
+        this.handleMoreClick = this.handleMoreClick.bind(this);
     }
 
     handleChange(event) {
@@ -102,15 +105,20 @@ class SearchField extends React.Component {
             result: searchString == this.state.searchString ?
                 this.state.result :
                 searchString == "" ? idx.search("*") : idx.search(searchString),
-            searchString
+            maxResults: maxResultsDefault
         });
     }
 
     handleKeyDown(event) {
         if (event.keyCode == 27) { // ESC
             event.preventDefault()
-            this.setState({ value: "", result: idx.search("*"), searchString: "" })
+            this.setState({ value: "", result: idx.search("*"), searchString: "", maxResults: maxResultsDefault })
         }
+    }
+
+    handleMoreClick(event) {
+        event.preventDefault()
+        this.setState({ maxResults: this.state.maxResults + 5 })
     }
 
     render() {
@@ -125,7 +133,12 @@ class SearchField extends React.Component {
                 </form>
                 <br></br>
 
-                {this.state.result.map((r) => { return (<Result key={r.ref} doc={store[r.ref]} />) })}
+                {this.state.result.slice(0, this.state.maxResults).map((r) =>
+                    <Result key={r.ref} doc={store[r.ref]} />
+                )}
+
+                {this.state.result.length > this.state.maxResults ?
+                    <a href="#" onClick={this.handleMoreClick}>Load More results</a> : null}
 
             </div>
         );

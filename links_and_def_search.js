@@ -109,7 +109,7 @@ var Result = function Result(_ref4) {
                         { style: { margin: "3px 0" } },
                         React.createElement(
                             'a',
-                            { href: doc[field] },
+                            { href: doc[field], target: '_blank' },
                             doc[field]
                         )
                     );
@@ -133,6 +133,8 @@ var Result = function Result(_ref4) {
     );
 };
 
+var maxResultsDefault = 10;
+
 var SearchField = function (_React$Component) {
     _inherits(SearchField, _React$Component);
 
@@ -141,9 +143,10 @@ var SearchField = function (_React$Component) {
 
         var _this2 = _possibleConstructorReturn(this, (SearchField.__proto__ || Object.getPrototypeOf(SearchField)).call(this, props));
 
-        _this2.state = { value: '', result: idx.search("*"), searchString: "" };
+        _this2.state = { value: '', result: idx.search("*"), searchString: "", maxResults: maxResultsDefault };
         _this2.handleChange = _this2.handleChange.bind(_this2);
         _this2.handleKeyDown = _this2.handleKeyDown.bind(_this2);
+        _this2.handleMoreClick = _this2.handleMoreClick.bind(_this2);
         return _this2;
     }
 
@@ -158,7 +161,7 @@ var SearchField = function (_React$Component) {
             this.setState({
                 value: event.target.value,
                 result: searchString == this.state.searchString ? this.state.result : searchString == "" ? idx.search("*") : idx.search(searchString),
-                searchString: searchString
+                maxResults: maxResultsDefault
             });
         }
     }, {
@@ -167,8 +170,14 @@ var SearchField = function (_React$Component) {
             if (event.keyCode == 27) {
                 // ESC
                 event.preventDefault();
-                this.setState({ value: "", result: idx.search("*"), searchString: "" });
+                this.setState({ value: "", result: idx.search("*"), searchString: "", maxResults: maxResultsDefault });
             }
+        }
+    }, {
+        key: 'handleMoreClick',
+        value: function handleMoreClick(event) {
+            event.preventDefault();
+            this.setState({ maxResults: this.state.maxResults + 5 });
         }
     }, {
         key: 'render',
@@ -188,9 +197,14 @@ var SearchField = function (_React$Component) {
                     )
                 ),
                 React.createElement('br', null),
-                this.state.result.map(function (r) {
+                this.state.result.slice(0, this.state.maxResults).map(function (r) {
                     return React.createElement(Result, { key: r.ref, doc: store[r.ref] });
-                })
+                }),
+                this.state.result.length > this.state.maxResults ? React.createElement(
+                    'a',
+                    { href: '#', onClick: this.handleMoreClick },
+                    'Load More results'
+                ) : null
             );
         }
     }]);
