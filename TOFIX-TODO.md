@@ -8,21 +8,25 @@
 
 :heavy_check_mark: Specify fields type in data.js and display their value accordingly
 
-:white_large_square: Test with more data
-
 :heavy_check_mark: Show a full page of results when no search string is entered
 
 :heavy_check_mark: Limit number of results shown at once (+ pagination)
 
-:white_large_square: Add a section in README: How to develop => npx line
-
 :heavy_check_mark: Add possibility to add boost to fields
 
-:white_large_square: Minify main js file
+:heavy_check_mark: Make the page mobile friendly (for now the font is too small and evrything is packed on the left)
 
-:white_large_square: Rename project: simple search page for custom data 
+:x: Minify main js file ? No, the size is ridiculous compared to the minified react-dom js (9 kB vs 116 kB)
+
+:black_square_button: Rename project: simple search page for custom data
+
+:black_square_button: Test with more data
+
+:black_square_button: Search bar always visible even when scrolling
+
+:black_square_button: Clear button in/over the input (an "X")
 
 <!--
 Markdown emojis:
-:white_large_square: :heavy_check_mark: :x: :heavy_check_mark:
+:white_large_square: :heavy_check_mark: :x: :black_square_button:
 -->

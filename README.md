@@ -1,15 +1,15 @@
 # Overview
 
-- Static single page with search-as-you-type capability
+- Static single webpage with search-as-you-type capability on any data you provide
 - POC (ie this very repository) runs on Github-Pages at https://stephgbzh.github.io/LinksAndDefSearch/
-  - type * in the search field to see all results
-  - type ESC in the search field to clear it 
-- Data is set in data.js, any change is reflected upon refresh (F5) of the HTML page (give Github a few seconds to automatically deploy the new version)
-- Locally the page to open is simply index.html
+  - when the search field is empty, you can see all unfiltered results (within a limit and a "Load more" button)
+  - type ESC in the search field to clear your last search
+- Data is set in data.js as a simple json array, any change is reflected upon refresh (F5) of the HTML page (give Github a few seconds to automatically deploy the new version)
+- Locally the page to open is simply index.html and works the same way
 - Powered by [Lunr](https://lunrjs.com/) and [React](https://reactjs.org/)
-- Source code is in src/links_and_def_search.jsx
-- Babel through npx transforms this jsx code to plain js (see further below for the exact command)
-- Tested with only small amounts of data
+- Source code is in src/links_and_def_search.jsx (no need to change anything here if you just want to use the search)
+- [Babel](https://babeljs.io/) through npx transforms this jsx code to plain js (see further below for the exact command)
+- Tested only with small amounts of data, bigger ones may be slow to handle
 
 # How to use
 
@@ -19,12 +19,13 @@ The present repo is a demo with some (small amount of) arbitrary data. You will 
 
 1. Clone the repository, you will need these files:
     - index.html
+    - style.css
     - data.js
     - links_and_def_search.js
     - libs/lunr@2.3.8.min.js
     - libs/react@16.13.1.production.min.js
     - libs/react-dom@16.13.1.production.min.js
-    - favicon.ico (optional)
+    - favicon.ico
 
 1. Modify data.js to put the data you are interested in
 1. Open index.html in your browser
