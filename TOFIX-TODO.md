@@ -20,6 +20,8 @@
 
 :white_large_square: Minify main js file
 
+:white_large_square: Rename project: simple search page for custom data 
+
 <!--
 Markdown emojis:
 :white_large_square: :heavy_check_mark: :x: :heavy_check_mark:
