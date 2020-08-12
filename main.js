@@ -145,15 +145,13 @@ var SearchField = function (_React$Component) {
     _createClass(SearchField, [{
         key: 'handleChange',
         value: function handleChange(event) {
-            if (event.target.value == this.state.value) {
-                return;
-            }
             var searchString = event.target.value.trim() == "" ? "" : "+*" + event.target.value.trim().replace(/\s+/g, "* +*") + "*";
 
             this.setState({
                 value: event.target.value,
                 result: searchString == this.state.searchString ? this.state.result : searchString == "" ? idx.search("*") : idx.search(searchString),
-                maxResults: MAX_RESULTS_DEFAULT
+                maxResults: MAX_RESULTS_DEFAULT,
+                searchString: searchString
             });
         }
     }, {
@@ -186,7 +184,8 @@ var SearchField = function (_React$Component) {
                         React.createElement(
                             'label',
                             null,
-                            React.createElement('input', { type: 'text', value: this.state.value, onChange: this.handleChange, onKeyDown: this.handleKeyDown,
+                            React.createElement('input', { type: 'text', value: this.state.value,
+                                onChange: this.handleChange, onKeyDown: this.handleKeyDown,
                                 placeholder: 'search' })
                         )
                     ),

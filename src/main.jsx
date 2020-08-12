@@ -86,9 +86,6 @@ class SearchField extends React.Component {
     }
 
     handleChange(event) {
-        if (event.target.value == this.state.value) {
-            return
-        }
         const searchString = event.target.value.trim() == "" ? ""
             : "+*" + event.target.value.trim().replace(/\s+/g, "* +*") + "*"
 
@@ -97,7 +94,8 @@ class SearchField extends React.Component {
             result: searchString == this.state.searchString ?
                 this.state.result :
                 searchString == "" ? idx.search("*") : idx.search(searchString),
-            maxResults: MAX_RESULTS_DEFAULT
+            maxResults: MAX_RESULTS_DEFAULT,
+            searchString
         });
     }
 
@@ -119,7 +117,8 @@ class SearchField extends React.Component {
                 <div class="form">
                     <form>
                         <label>
-                            <input type="text" value={this.state.value} onChange={this.handleChange} onKeyDown={this.handleKeyDown}
+                            <input type="text" value={this.state.value}
+                                onChange={this.handleChange} onKeyDown={this.handleKeyDown}
                                 placeholder="search" />
                         </label>
                     </form>
