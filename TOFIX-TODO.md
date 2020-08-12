@@ -24,13 +24,13 @@
 
 :heavy_check_mark: Clear button in/over the input (an "X")
 
+:heavy_check_mark: Search bar too wide on mobile
+
+:x: Remove React => Vue.js ? No framework ? (and bring back minify subject...) => no need for now
+
 :black_square_button: Test with more data
 
-:black_square_button: Remove React => Vue.js ? No framework ? (and bring back minify subject...)
-
 :black_square_button: Dark theme
-
-:black_square_button: Search bar too wide on mobile
 
 <!--
 Markdown emojis:

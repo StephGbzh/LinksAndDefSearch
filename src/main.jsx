@@ -131,6 +131,7 @@ class SearchField extends React.Component {
                             onChange={this.handleChange} onKeyDown={this.handleKeyDown}
                             placeholder="search"
                             autoFocus="true"
+                            // https://stackoverflow.com/a/40235334
                             ref={input => input && input.focus()} />
                         <span class="clear" onClick={this.handleClear}>
                             <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

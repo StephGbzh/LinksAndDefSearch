@@ -196,8 +196,9 @@ var SearchField = function (_React$Component) {
                         React.createElement('input', { type: 'text', value: this.state.value,
                             onChange: this.handleChange, onKeyDown: this.handleKeyDown,
                             placeholder: 'search',
-                            autoFocus: 'true',
-                            ref: function ref(input) {
+                            autoFocus: 'true'
+                            // https://stackoverflow.com/a/40235334
+                            , ref: function ref(input) {
                                 return input && input.focus();
                             } }),
                         React.createElement(

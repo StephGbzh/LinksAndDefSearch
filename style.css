@@ -31,7 +31,7 @@ div.input
     border-radius: 5px;
     height: 40px;
     display: inline-flex;
-    width: 400px;
+    width: 396px;
 }
 
 input
@@ -42,7 +42,7 @@ input
     margin: 4px 0 0 5px;
     height: 32px;
     outline: none;
-    width: 90%;
+    width: 92%;
 }
 
 span.clear
