@@ -139,6 +139,7 @@ var SearchField = function (_React$Component) {
         _this2.handleChange = _this2.handleChange.bind(_this2);
         _this2.handleKeyDown = _this2.handleKeyDown.bind(_this2);
         _this2.handleMoreClick = _this2.handleMoreClick.bind(_this2);
+        _this2.handleClear = _this2.handleClear.bind(_this2);
         return _this2;
     }
 
@@ -170,6 +171,12 @@ var SearchField = function (_React$Component) {
             this.setState({ maxResults: this.state.maxResults + MAX_RESULTS_DEFAULT });
         }
     }, {
+        key: 'handleClear',
+        value: function handleClear(event) {
+            event.preventDefault();
+            this.setState({ value: "", result: idx.search("*"), searchString: "", maxResults: MAX_RESULTS_DEFAULT });
+        }
+    }, {
         key: 'render',
         value: function render() {
             return React.createElement(
@@ -177,16 +184,21 @@ var SearchField = function (_React$Component) {
                 { 'class': 'main' },
                 React.createElement(
                     'div',
-                    { 'class': 'form' },
+                    { 'class': 'top' },
                     React.createElement(
-                        'form',
-                        null,
+                        'div',
+                        { 'class': 'input' },
+                        React.createElement('input', { type: 'text', value: this.state.value,
+                            onChange: this.handleChange, onKeyDown: this.handleKeyDown,
+                            placeholder: 'search' }),
                         React.createElement(
-                            'label',
-                            null,
-                            React.createElement('input', { type: 'text', value: this.state.value,
-                                onChange: this.handleChange, onKeyDown: this.handleKeyDown,
-                                placeholder: 'search' })
+                            'span',
+                            { 'class': 'clear', onClick: this.handleClear },
+                            React.createElement(
+                                'svg',
+                                { focusable: 'false', xmlns: 'http://www.w3.org/2000/svg', viewBox: '0 0 24 24' },
+                                React.createElement('path', { d: 'M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z' })
+                            )
                         )
                     ),
                     React.createElement(

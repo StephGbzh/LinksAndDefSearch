@@ -22,9 +22,9 @@
 
 :heavy_check_mark: Search bar always visible even when scrolling
 
-:black_square_button: Test with more data
+:heavy_check_mark: Clear button in/over the input (an "X")
 
-:black_square_button: Clear button in/over the input (an "X")
+:black_square_button: Test with more data
 
 :black_square_button: Remove React => Vue.js ? No framework ? (and bring back minify subject...)
 

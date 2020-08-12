@@ -15,26 +15,39 @@ div.main
     margin: 0 5px 0 5px;
 }
 
-div.form
+div.top
 {
     position: fixed;
     width: 100%;
     max-width: 940px;
     background-color: white;
     padding: 5px 0;
-    border-bottom: thin solid lightgray;
+    border-bottom: thin solid lightgrey;
 }
 
-form
+div.input
 {
-    margin: 0 auto;
+    border: thin solid lightgrey;
+    border-radius: 5px;
+    height: 40px;
+    display: inline-flex;
 }
 
 input
 {
-    width: 100%;
     line-height: 40px;
     font-size: large;
+    border: none;
+    margin: 4px 0 0 5px;
+    height: 32px;
+    outline: none;
+}
+
+span.clear
+{
+    width: 25px;
+    display: block;
+    margin-top: 8px;
 }
 
 div.results-count
