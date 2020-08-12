@@ -135,7 +135,12 @@ var SearchField = function (_React$Component) {
 
         var _this2 = _possibleConstructorReturn(this, (SearchField.__proto__ || Object.getPrototypeOf(SearchField)).call(this, props));
 
-        _this2.state = { value: '', result: idx.search("*"), searchString: "", maxResults: MAX_RESULTS_DEFAULT };
+        _this2.state = {
+            value: '',
+            result: idx.search("*"),
+            searchString: "",
+            maxResults: MAX_RESULTS_DEFAULT
+        };
         _this2.handleChange = _this2.handleChange.bind(_this2);
         _this2.handleKeyDown = _this2.handleKeyDown.bind(_this2);
         _this2.handleMoreClick = _this2.handleMoreClick.bind(_this2);
@@ -190,7 +195,11 @@ var SearchField = function (_React$Component) {
                         { 'class': 'input' },
                         React.createElement('input', { type: 'text', value: this.state.value,
                             onChange: this.handleChange, onKeyDown: this.handleKeyDown,
-                            placeholder: 'search' }),
+                            placeholder: 'search',
+                            autoFocus: 'true',
+                            ref: function ref(input) {
+                                return input && input.focus();
+                            } }),
                         React.createElement(
                             'span',
                             { 'class': 'clear', onClick: this.handleClear },
