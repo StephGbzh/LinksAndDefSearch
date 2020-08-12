@@ -6,12 +6,26 @@ html
 body
 {
     max-width: 950px;
-    margin: 5px auto;
+    margin: 0 auto;
 }
 
 div.main
 {
     margin: 0 5px 0 5px;
+}
+
+div.form
+{
+    position: fixed;
+    width: 100%;
+    max-width: 940px;
+    background-color: white;
+    padding: 5px 0;
+}
+
+div.results
+{
+    padding-top: 50px;
 }
 
 form

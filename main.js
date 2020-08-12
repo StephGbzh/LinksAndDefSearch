@@ -178,24 +178,32 @@ var SearchField = function (_React$Component) {
                 'div',
                 { 'class': 'main' },
                 React.createElement(
-                    'form',
-                    null,
+                    'div',
+                    { 'class': 'form' },
                     React.createElement(
-                        'label',
+                        'form',
                         null,
-                        React.createElement('input', { type: 'text', value: this.state.value, onChange: this.handleChange, onKeyDown: this.handleKeyDown,
-                            placeholder: 'search' })
+                        React.createElement(
+                            'label',
+                            null,
+                            React.createElement('input', { type: 'text', value: this.state.value, onChange: this.handleChange, onKeyDown: this.handleKeyDown,
+                                placeholder: 'search' })
+                        )
                     )
                 ),
                 React.createElement('br', null),
-                this.state.result.slice(0, this.state.maxResults).map(function (r) {
-                    return React.createElement(Result, { key: r.ref, doc: store[r.ref] });
-                }),
-                this.state.result.length > this.state.maxResults ? React.createElement(
-                    'button',
-                    { 'class': 'load-more', onClick: this.handleMoreClick },
-                    'Load more results'
-                ) : null
+                React.createElement(
+                    'div',
+                    { 'class': 'results' },
+                    this.state.result.slice(0, this.state.maxResults).map(function (r) {
+                        return React.createElement(Result, { key: r.ref, doc: store[r.ref] });
+                    }),
+                    this.state.result.length > this.state.maxResults ? React.createElement(
+                        'button',
+                        { 'class': 'load-more', onClick: this.handleMoreClick },
+                        'Load more results'
+                    ) : null
+                )
             );
         }
     }]);

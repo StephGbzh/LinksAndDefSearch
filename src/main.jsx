@@ -116,20 +116,24 @@ class SearchField extends React.Component {
     render() {
         return (
             <div class="main">
-                <form>
-                    <label>
-                        <input type="text" value={this.state.value} onChange={this.handleChange} onKeyDown={this.handleKeyDown}
-                            placeholder="search" />
-                    </label>
-                </form>
+                <div class="form">
+                    <form>
+                        <label>
+                            <input type="text" value={this.state.value} onChange={this.handleChange} onKeyDown={this.handleKeyDown}
+                                placeholder="search" />
+                        </label>
+                    </form>
+                </div>
                 <br></br>
 
-                {this.state.result.slice(0, this.state.maxResults).map((r) =>
-                    <Result key={r.ref} doc={store[r.ref]} />
-                )}
+                <div class="results">
+                    {this.state.result.slice(0, this.state.maxResults).map((r) =>
+                        <Result key={r.ref} doc={store[r.ref]} />
+                    )}
 
-                {this.state.result.length > this.state.maxResults ?
-                    <button class="load-more" onClick={this.handleMoreClick}>Load more results</button> : null}
+                    {this.state.result.length > this.state.maxResults ?
+                        <button class="load-more" onClick={this.handleMoreClick}>Load more results</button> : null}
+                </div>
             </div>
         );
     }
