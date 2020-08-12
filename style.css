@@ -7,6 +7,7 @@ body
 {
     max-width: 950px;
     margin: 0 auto;
+    padding-bottom: 15px;
 }
 
 div.main
@@ -23,11 +24,6 @@ div.form
     padding: 5px 0;
 }
 
-div.results
-{
-    padding-top: 50px;
-}
-
 form
 {
     margin: 0 auto;
@@ -38,6 +34,18 @@ input
     width: 100%;
     line-height: 40px;
     font-size: large;
+}
+
+div.results-count
+{
+    margin-top: 5px;
+    color: grey;
+    font-size: smaller;
+}
+
+div.results
+{
+    padding-top: 50px;
 }
 
 div.result

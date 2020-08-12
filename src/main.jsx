@@ -123,6 +123,9 @@ class SearchField extends React.Component {
                                 placeholder="search" />
                         </label>
                     </form>
+                    <div class="results-count">
+                        <span>{this.state.result.length} results</span>
+                    </div>
                 </div>
                 <br></br>
 

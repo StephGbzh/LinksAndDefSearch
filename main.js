@@ -189,6 +189,16 @@ var SearchField = function (_React$Component) {
                             React.createElement('input', { type: 'text', value: this.state.value, onChange: this.handleChange, onKeyDown: this.handleKeyDown,
                                 placeholder: 'search' })
                         )
+                    ),
+                    React.createElement(
+                        'div',
+                        { 'class': 'results-count' },
+                        React.createElement(
+                            'span',
+                            null,
+                            this.state.result.length,
+                            ' results'
+                        )
                     )
                 ),
                 React.createElement('br', null),
