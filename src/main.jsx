@@ -1,5 +1,8 @@
 'use strict';
 
+const useState = React.useState
+const useCallback = React.useCallback
+
 const store = {}
 
 var idx = lunr(function () {
@@ -23,7 +26,6 @@ var idx = lunr(function () {
         store[i] = doc
     }, this)
 })
-
 
 // https://stackoverflow.com/questions/3426404/create-a-hexadecimal-colour-based-on-a-string-with-javascript
 const stringToColour = (str) => {
@@ -75,87 +77,85 @@ const Result = ({ doc }) => (
 )
 
 const MAX_RESULTS_DEFAULT = 10
+const fullResults = idx.search("*")
 
-class SearchField extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            value: '',
-            result: idx.search("*"),
-            searchString: "",
-            maxResults: MAX_RESULTS_DEFAULT
-        };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleKeyDown = this.handleKeyDown.bind(this);
-        this.handleMoreClick = this.handleMoreClick.bind(this);
-        this.handleClear = this.handleClear.bind(this);
-    }
+// https://reactjs.org/docs/hooks-state.html
+// https://stackoverflow.com/questions/53215067/how-can-i-bind-function-with-hooks-in-react
+// https://reactjs.org/docs/hooks-reference.html#usecallback
+const SearchField = () => {
+    const [value, setValue] = useState('')
+    const [result, setResult] = useState(fullResults)
+    const [searchString, setSearchString] = useState("")
+    const [maxResults, setMaxResults] = useState(MAX_RESULTS_DEFAULT)
 
-    handleChange(event) {
-        const searchString = event.target.value.trim() == "" ? ""
+    const handleChange = useCallback((event) => {
+        const newSearchString = event.target.value.trim() == "" ? ""
             : "+*" + event.target.value.trim().replace(/\s+/g, "* +*") + "*"
 
-        this.setState({
-            value: event.target.value,
-            result: searchString == this.state.searchString ?
-                this.state.result :
-                searchString == "" ? idx.search("*") : idx.search(searchString),
-            maxResults: MAX_RESULTS_DEFAULT,
-            searchString
-        });
-    }
+        setValue(event.target.value)
+        setResult(newSearchString == searchString ?
+            result :
+            newSearchString == "" ? fullResults : idx.search(newSearchString))
+        setSearchString(newSearchString)
+        setMaxResults(MAX_RESULTS_DEFAULT)
+    }, [])
 
-    handleKeyDown(event) {
+    const handleKeyDown = useCallback((event) => {
         if (event.keyCode == 27) { // ESC
             event.preventDefault()
-            this.setState({ value: "", result: idx.search("*"), searchString: "", maxResults: MAX_RESULTS_DEFAULT })
+            clearSearchBar()
         }
-    }
+    }, [])
 
-    handleMoreClick(event) {
+    const handleMoreClick = useCallback((event) => {
         event.preventDefault()
-        this.setState({ maxResults: this.state.maxResults + MAX_RESULTS_DEFAULT })
-    }
+        setMaxResults(maxResults + MAX_RESULTS_DEFAULT)
+    }, [])
 
-    handleClear(event) {
+    const handleClear = useCallback((event) => {
         event.preventDefault()
-        this.setState({ value: "", result: idx.search("*"), searchString: "", maxResults: MAX_RESULTS_DEFAULT })
+        clearSearchBar()
+    }, [])
+
+    const clearSearchBar = () => {
+        setValue("")
+        setResult(fullResults)
+        setSearchString("")
+        setMaxResults(MAX_RESULTS_DEFAULT)
     }
 
-    render() {
-        return (
-            <div class="main">
-                <div class="top">
-                    <div class="input">
-                        <input type="text" value={this.state.value}
-                            onChange={this.handleChange} onKeyDown={this.handleKeyDown}
-                            placeholder="search"
-                            autoFocus="true"
-                            // https://stackoverflow.com/a/40235334
-                            ref={input => input && input.focus()} />
-                        <span class="clear" onClick={this.handleClear}>
-                            <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
-                            </svg>
-                        </span>
-                    </div>
-                    <div class="results-count">
-                        <span>{this.state.result.length} results</span>
-                    </div>
+    return (
+        <div class="main">
+            <div class="top">
+                <div class="input">
+                    <input type="text" value={value}
+                        onChange={handleChange} onKeyDown={handleKeyDown}
+                        placeholder="search"
+                        autoFocus="true"
+                        // https://stackoverflow.com/a/40235334
+                        ref={input => input && input.focus()} />
+                    <span class="clear" onClick={handleClear}>
+                        <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                        </svg>
+                    </span>
                 </div>
-                <br></br>
-
-                <div class="results">
-                    {this.state.result.slice(0, this.state.maxResults).map((r) =>
-                        <Result key={r.ref} doc={store[r.ref]} />
-                    )}
-
-                    {this.state.result.length > this.state.maxResults ?
-                        <button class="load-more" onClick={this.handleMoreClick}>Load more results</button> : null}
+                <div class="results-count">
+                    <span>{result.length} results</span>
                 </div>
             </div>
-        );
-    }
+            <br></br>
+
+            <div class="results">
+                {result.slice(0, maxResults).map((r) =>
+                    <Result key={r.ref} doc={store[r.ref]} />
+                )}
+
+                {result.length > maxResults ?
+                    <button class="load-more" onClick={handleMoreClick}>Load more results</button> : null}
+            </div>
+        </div>
+    )
 }
 
 let domContainer = document.querySelector('#root');

@@ -1,14 +1,9 @@
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+var useState = React.useState;
+var useCallback = React.useCallback;
 
 var store = {};
 
@@ -126,121 +121,119 @@ var Result = function Result(_ref4) {
 };
 
 var MAX_RESULTS_DEFAULT = 10;
+var fullResults = idx.search("*");
 
-var SearchField = function (_React$Component) {
-    _inherits(SearchField, _React$Component);
+// https://reactjs.org/docs/hooks-state.html
+// https://stackoverflow.com/questions/53215067/how-can-i-bind-function-with-hooks-in-react
+// https://reactjs.org/docs/hooks-reference.html#usecallback
+var SearchField = function SearchField() {
+    var _useState = useState(''),
+        _useState2 = _slicedToArray(_useState, 2),
+        value = _useState2[0],
+        setValue = _useState2[1];
 
-    function SearchField(props) {
-        _classCallCheck(this, SearchField);
+    var _useState3 = useState(fullResults),
+        _useState4 = _slicedToArray(_useState3, 2),
+        result = _useState4[0],
+        setResult = _useState4[1];
 
-        var _this2 = _possibleConstructorReturn(this, (SearchField.__proto__ || Object.getPrototypeOf(SearchField)).call(this, props));
+    var _useState5 = useState(""),
+        _useState6 = _slicedToArray(_useState5, 2),
+        searchString = _useState6[0],
+        setSearchString = _useState6[1];
 
-        _this2.state = {
-            value: '',
-            result: idx.search("*"),
-            searchString: "",
-            maxResults: MAX_RESULTS_DEFAULT
-        };
-        _this2.handleChange = _this2.handleChange.bind(_this2);
-        _this2.handleKeyDown = _this2.handleKeyDown.bind(_this2);
-        _this2.handleMoreClick = _this2.handleMoreClick.bind(_this2);
-        _this2.handleClear = _this2.handleClear.bind(_this2);
-        return _this2;
-    }
+    var _useState7 = useState(MAX_RESULTS_DEFAULT),
+        _useState8 = _slicedToArray(_useState7, 2),
+        maxResults = _useState8[0],
+        setMaxResults = _useState8[1];
 
-    _createClass(SearchField, [{
-        key: 'handleChange',
-        value: function handleChange(event) {
-            var searchString = event.target.value.trim() == "" ? "" : "+*" + event.target.value.trim().replace(/\s+/g, "* +*") + "*";
+    var handleChange = useCallback(function (event) {
+        var newSearchString = event.target.value.trim() == "" ? "" : "+*" + event.target.value.trim().replace(/\s+/g, "* +*") + "*";
 
-            this.setState({
-                value: event.target.value,
-                result: searchString == this.state.searchString ? this.state.result : searchString == "" ? idx.search("*") : idx.search(searchString),
-                maxResults: MAX_RESULTS_DEFAULT,
-                searchString: searchString
-            });
-        }
-    }, {
-        key: 'handleKeyDown',
-        value: function handleKeyDown(event) {
-            if (event.keyCode == 27) {
-                // ESC
-                event.preventDefault();
-                this.setState({ value: "", result: idx.search("*"), searchString: "", maxResults: MAX_RESULTS_DEFAULT });
-            }
-        }
-    }, {
-        key: 'handleMoreClick',
-        value: function handleMoreClick(event) {
+        setValue(event.target.value);
+        setResult(newSearchString == searchString ? result : newSearchString == "" ? fullResults : idx.search(newSearchString));
+        setSearchString(newSearchString);
+        setMaxResults(MAX_RESULTS_DEFAULT);
+    }, []);
+
+    var handleKeyDown = useCallback(function (event) {
+        if (event.keyCode == 27) {
+            // ESC
             event.preventDefault();
-            this.setState({ maxResults: this.state.maxResults + MAX_RESULTS_DEFAULT });
+            clearSearchBar();
         }
-    }, {
-        key: 'handleClear',
-        value: function handleClear(event) {
-            event.preventDefault();
-            this.setState({ value: "", result: idx.search("*"), searchString: "", maxResults: MAX_RESULTS_DEFAULT });
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            return React.createElement(
+    }, []);
+
+    var handleMoreClick = useCallback(function (event) {
+        event.preventDefault();
+        setMaxResults(maxResults + MAX_RESULTS_DEFAULT);
+    }, []);
+
+    var handleClear = useCallback(function (event) {
+        event.preventDefault();
+        clearSearchBar();
+    }, []);
+
+    var clearSearchBar = function clearSearchBar() {
+        setValue("");
+        setResult(fullResults);
+        setSearchString("");
+        setMaxResults(MAX_RESULTS_DEFAULT);
+    };
+
+    return React.createElement(
+        'div',
+        { 'class': 'main' },
+        React.createElement(
+            'div',
+            { 'class': 'top' },
+            React.createElement(
                 'div',
-                { 'class': 'main' },
+                { 'class': 'input' },
+                React.createElement('input', { type: 'text', value: value,
+                    onChange: handleChange, onKeyDown: handleKeyDown,
+                    placeholder: 'search',
+                    autoFocus: 'true'
+                    // https://stackoverflow.com/a/40235334
+                    , ref: function ref(input) {
+                        return input && input.focus();
+                    } }),
                 React.createElement(
-                    'div',
-                    { 'class': 'top' },
+                    'span',
+                    { 'class': 'clear', onClick: handleClear },
                     React.createElement(
-                        'div',
-                        { 'class': 'input' },
-                        React.createElement('input', { type: 'text', value: this.state.value,
-                            onChange: this.handleChange, onKeyDown: this.handleKeyDown,
-                            placeholder: 'search',
-                            autoFocus: 'true'
-                            // https://stackoverflow.com/a/40235334
-                            , ref: function ref(input) {
-                                return input && input.focus();
-                            } }),
-                        React.createElement(
-                            'span',
-                            { 'class': 'clear', onClick: this.handleClear },
-                            React.createElement(
-                                'svg',
-                                { focusable: 'false', xmlns: 'http://www.w3.org/2000/svg', viewBox: '0 0 24 24' },
-                                React.createElement('path', { d: 'M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z' })
-                            )
-                        )
-                    ),
-                    React.createElement(
-                        'div',
-                        { 'class': 'results-count' },
-                        React.createElement(
-                            'span',
-                            null,
-                            this.state.result.length,
-                            ' results'
-                        )
+                        'svg',
+                        { focusable: 'false', xmlns: 'http://www.w3.org/2000/svg', viewBox: '0 0 24 24' },
+                        React.createElement('path', { d: 'M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z' })
                     )
-                ),
-                React.createElement('br', null),
-                React.createElement(
-                    'div',
-                    { 'class': 'results' },
-                    this.state.result.slice(0, this.state.maxResults).map(function (r) {
-                        return React.createElement(Result, { key: r.ref, doc: store[r.ref] });
-                    }),
-                    this.state.result.length > this.state.maxResults ? React.createElement(
-                        'button',
-                        { 'class': 'load-more', onClick: this.handleMoreClick },
-                        'Load more results'
-                    ) : null
                 )
-            );
-        }
-    }]);
-
-    return SearchField;
-}(React.Component);
+            ),
+            React.createElement(
+                'div',
+                { 'class': 'results-count' },
+                React.createElement(
+                    'span',
+                    null,
+                    result.length,
+                    ' results'
+                )
+            )
+        ),
+        React.createElement('br', null),
+        React.createElement(
+            'div',
+            { 'class': 'results' },
+            result.slice(0, maxResults).map(function (r) {
+                return React.createElement(Result, { key: r.ref, doc: store[r.ref] });
+            }),
+            result.length > maxResults ? React.createElement(
+                'button',
+                { 'class': 'load-more', onClick: handleMoreClick },
+                'Load more results'
+            ) : null
+        )
+    );
+};
 
 var domContainer = document.querySelector('#root');
 ReactDOM.render(React.createElement(SearchField, null), domContainer);
