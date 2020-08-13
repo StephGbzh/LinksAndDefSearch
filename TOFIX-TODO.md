@@ -28,9 +28,9 @@
 
 :x: Remove React => Vue.js ? No framework ? (and bring back minify subject...) => no need for now
 
-:black_square_button: Test with more data
+:heavy_check_mark: Dark theme
 
-:black_square_button: Dark theme
+:black_square_button: Test with more data
 
 :black_square_button: Make possible to switch between datasets
 

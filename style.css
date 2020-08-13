@@ -1,3 +1,22 @@
+:root
+{
+    --bgcolor: black;
+    --fgcolor: white;
+    --linkcolor: royalblue;
+    --linkvisitedcolor: #6a20ae;
+    --grey: lightgrey;
+}
+
+a
+{
+    color: var(--linkcolor);
+}
+
+a:visited
+{
+    color: var(--linkvisitedcolor);
+}
+
 html
 {
     overflow-y: scroll;
@@ -8,6 +27,8 @@ body
     max-width: 950px;
     margin: 0 auto;
     padding-bottom: 15px;
+    background-color: var(--bgcolor);
+    color: var(--fgcolor);
 }
 
 div.main
@@ -20,7 +41,7 @@ div.top
     position: fixed;
     width: 100%;
     max-width: 940px;
-    background-color: white;
+    background-color: var(--bgcolor);
     padding: 5px 0;
     border-bottom: thin solid lightgrey;
 }
@@ -39,23 +60,28 @@ input
     line-height: 40px;
     font-size: large;
     border: none;
-    margin: 4px 0 0 5px;
+    margin: 4px 0 0 4px;
     height: 32px;
     outline: none;
-    width: 92%;
+    width: 356px;
 }
 
 span.clear
 {
-    width: 25px;
+    width: 32px;
     display: block;
-    margin-top: 8px;
+    margin-top: 4px;
+}
+
+span.clear > svg
+{
+    background-color: var(--fgcolor);
 }
 
 div.results-count
 {
     margin-top: 5px;
-    color: grey;
+    color: var(--grey);
     font-size: smaller;
 }
 
