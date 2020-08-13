@@ -4,6 +4,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 var useState = React.useState;
 var useCallback = React.useCallback;
+var useEffect = React.useEffect;
 
 var store = {};
 
@@ -127,32 +128,24 @@ var fullResults = idx.search("*");
 // https://stackoverflow.com/questions/53215067/how-can-i-bind-function-with-hooks-in-react
 // https://reactjs.org/docs/hooks-reference.html#usecallback
 var SearchField = function SearchField() {
-    var _useState = useState(''),
+    var _useState = useState({ raw: '', reworked: '', results: fullResults }),
         _useState2 = _slicedToArray(_useState, 2),
-        value = _useState2[0],
-        setValue = _useState2[1];
+        search = _useState2[0],
+        setSearch = _useState2[1];
 
-    var _useState3 = useState(fullResults),
+    var _useState3 = useState(MAX_RESULTS_DEFAULT),
         _useState4 = _slicedToArray(_useState3, 2),
-        result = _useState4[0],
-        setResult = _useState4[1];
-
-    var _useState5 = useState(""),
-        _useState6 = _slicedToArray(_useState5, 2),
-        searchString = _useState6[0],
-        setSearchString = _useState6[1];
-
-    var _useState7 = useState(MAX_RESULTS_DEFAULT),
-        _useState8 = _slicedToArray(_useState7, 2),
-        maxResults = _useState8[0],
-        setMaxResults = _useState8[1];
+        maxResults = _useState4[0],
+        setMaxResults = _useState4[1];
 
     var handleChange = useCallback(function (event) {
-        var newSearchString = event.target.value.trim() == "" ? "" : "+*" + event.target.value.trim().replace(/\s+/g, "* +*") + "*";
+        var reworkedSearch = event.target.value.trim() == "" ? "" : "+*" + event.target.value.trim().replace(/\s+/g, "* +*") + "*";
 
-        setValue(event.target.value);
-        setResult(newSearchString == searchString ? result : newSearchString == "" ? fullResults : idx.search(newSearchString));
-        setSearchString(newSearchString);
+        setSearch({
+            raw: event.target.value,
+            reworked: reworkedSearch,
+            results: reworkedSearch == search.reworked ? search.results : reworkedSearch == "" ? fullResults : idx.search(reworkedSearch)
+        });
         setMaxResults(MAX_RESULTS_DEFAULT);
     }, []);
 
@@ -175,9 +168,7 @@ var SearchField = function SearchField() {
     }, []);
 
     var clearSearchBar = function clearSearchBar() {
-        setValue("");
-        setResult(fullResults);
-        setSearchString("");
+        setSearch({ raw: "", reworked: "", results: fullResults });
         setMaxResults(MAX_RESULTS_DEFAULT);
     };
 
@@ -190,7 +181,7 @@ var SearchField = function SearchField() {
             React.createElement(
                 'div',
                 { 'class': 'input' },
-                React.createElement('input', { type: 'text', value: value,
+                React.createElement('input', { type: 'text', value: search.raw,
                     onChange: handleChange, onKeyDown: handleKeyDown,
                     placeholder: 'search',
                     autoFocus: 'true'
@@ -214,7 +205,7 @@ var SearchField = function SearchField() {
                 React.createElement(
                     'span',
                     null,
-                    result.length,
+                    search.results.length,
                     ' results'
                 )
             )
@@ -223,10 +214,10 @@ var SearchField = function SearchField() {
         React.createElement(
             'div',
             { 'class': 'results' },
-            result.slice(0, maxResults).map(function (r) {
+            search.results.slice(0, maxResults).map(function (r) {
                 return React.createElement(Result, { key: r.ref, doc: store[r.ref] });
             }),
-            result.length > maxResults ? React.createElement(
+            search.results.length > maxResults ? React.createElement(
                 'button',
                 { 'class': 'load-more', onClick: handleMoreClick },
                 'Load more results'

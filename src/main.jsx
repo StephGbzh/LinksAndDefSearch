@@ -2,6 +2,7 @@
 
 const useState = React.useState
 const useCallback = React.useCallback
+const useEffect = React.useEffect
 
 const store = {}
 
@@ -83,20 +84,20 @@ const fullResults = idx.search("*")
 // https://stackoverflow.com/questions/53215067/how-can-i-bind-function-with-hooks-in-react
 // https://reactjs.org/docs/hooks-reference.html#usecallback
 const SearchField = () => {
-    const [value, setValue] = useState('')
-    const [result, setResult] = useState(fullResults)
-    const [searchString, setSearchString] = useState("")
+    const [search, setSearch] = useState({ raw: '', reworked: '', results: fullResults })
     const [maxResults, setMaxResults] = useState(MAX_RESULTS_DEFAULT)
 
     const handleChange = useCallback((event) => {
-        const newSearchString = event.target.value.trim() == "" ? ""
+        const reworkedSearch = event.target.value.trim() == "" ? ""
             : "+*" + event.target.value.trim().replace(/\s+/g, "* +*") + "*"
 
-        setValue(event.target.value)
-        setResult(newSearchString == searchString ?
-            result :
-            newSearchString == "" ? fullResults : idx.search(newSearchString))
-        setSearchString(newSearchString)
+        setSearch({
+            raw: event.target.value,
+            reworked: reworkedSearch,
+            results: reworkedSearch == search.reworked ?
+                search.results :
+                reworkedSearch == "" ? fullResults : idx.search(reworkedSearch)
+        })
         setMaxResults(MAX_RESULTS_DEFAULT)
     }, [])
 
@@ -118,9 +119,7 @@ const SearchField = () => {
     }, [])
 
     const clearSearchBar = () => {
-        setValue("")
-        setResult(fullResults)
-        setSearchString("")
+        setSearch({ raw: "", reworked: "", results: fullResults })
         setMaxResults(MAX_RESULTS_DEFAULT)
     }
 
@@ -128,7 +127,7 @@ const SearchField = () => {
         <div class="main">
             <div class="top">
                 <div class="input">
-                    <input type="text" value={value}
+                    <input type="text" value={search.raw}
                         onChange={handleChange} onKeyDown={handleKeyDown}
                         placeholder="search"
                         autoFocus="true"
@@ -141,17 +140,17 @@ const SearchField = () => {
                     </span>
                 </div>
                 <div class="results-count">
-                    <span>{result.length} results</span>
+                    <span>{search.results.length} results</span>
                 </div>
             </div>
             <br></br>
 
             <div class="results">
-                {result.slice(0, maxResults).map((r) =>
+                {search.results.slice(0, maxResults).map((r) =>
                     <Result key={r.ref} doc={store[r.ref]} />
                 )}
 
-                {result.length > maxResults ?
+                {search.results.length > maxResults ?
                     <button class="load-more" onClick={handleMoreClick}>Load more results</button> : null}
             </div>
         </div>
