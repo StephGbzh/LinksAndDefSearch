@@ -32,6 +32,10 @@
 
 :black_square_button: Dark theme
 
+:black_square_button: Make possible to switch between datasets
+
+:black_square_button: Fetch data from elsewhere => e.g. urls on github
+
 <!--
 Markdown emojis:
 :white_large_square: :heavy_check_mark: :x: :black_square_button:
