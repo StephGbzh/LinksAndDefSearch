@@ -4,30 +4,6 @@ const useState = React.useState
 const useCallback = React.useCallback
 const useEffect = React.useEffect
 
-const store = {}
-
-var idx = lunr(function () {
-    this.ref('key')
-    // https://lunrjs.com/docs/lunr.Builder.html#field
-    Object.entries(fields).forEach(([field, attributes]) => {
-        this.field(field, attributes)
-    })
-
-    // remove the stemmer as it breaks some wildcard searches
-    // the performance will be worse but no big deal as long as we don't have too much data
-    // https://github.com/olivernn/lunr.js/issues/377#issuecomment-426380071
-    // possible other workaround https://github.com/hoelzro/tw-full-text-search/issues/9
-    // same pb https://github.com/olivernn/lunr.js/issues/421
-    this.pipeline.remove(lunr.stemmer);
-    this.searchPipeline.remove(lunr.stemmer);
-
-    documents.forEach((doc, i) => {
-        doc["key"] = i
-        this.add(doc)
-        store[i] = doc
-    }, this)
-})
-
 // https://stackoverflow.com/questions/3426404/create-a-hexadecimal-colour-based-on-a-string-with-javascript
 const stringToColour = (str) => {
     var hash = 0;
@@ -78,7 +54,6 @@ const Result = ({ doc }) => (
 )
 
 const MAX_RESULTS_DEFAULT = 10
-const fullResults = idx.search("*")
 
 // https://reactjs.org/docs/hooks-state.html
 // https://stackoverflow.com/questions/53215067/how-can-i-bind-function-with-hooks-in-react
@@ -157,5 +132,43 @@ const SearchField = () => {
     )
 }
 
-let domContainer = document.querySelector('#root');
-ReactDOM.render(<SearchField />, domContainer);
+const store = {}
+var fullResults
+var idx
+var fields
+
+fetch(
+  "https://raw.githubusercontent.com/StephGbzh/customta/master/data.json"
+)
+  .then((response) => response.json())
+  .then((json) => {
+    fields = json.fields;
+    const documents = json.documents;
+    idx = lunr(function () {
+      this.ref("key");
+      // https://lunrjs.com/docs/lunr.Builder.html#field
+      Object.entries(fields).forEach(([field, attributes]) => {
+        this.field(field, attributes);
+      });
+
+      // remove the stemmer as it breaks some wildcard searches
+      // the performance will be worse but no big deal as long as we don't have too much data
+      // https://github.com/olivernn/lunr.js/issues/377#issuecomment-426380071
+      // possible other workaround https://github.com/hoelzro/tw-full-text-search/issues/9
+      // same pb https://github.com/olivernn/lunr.js/issues/421
+      this.pipeline.remove(lunr.stemmer);
+      this.searchPipeline.remove(lunr.stemmer);
+
+      documents.forEach((doc, i) => {
+        doc["key"] = i;
+        this.add(doc);
+        store[i] = doc;
+      }, this);
+    });
+    fullResults = idx.search("*");
+
+    let domContainer = document.querySelector("#root");
+    ReactDOM.render(<SearchField />, domContainer);
+  });
+
+

@@ -6,36 +6,6 @@ var useState = React.useState;
 var useCallback = React.useCallback;
 var useEffect = React.useEffect;
 
-var store = {};
-
-var idx = lunr(function () {
-    var _this = this;
-
-    this.ref('key');
-    // https://lunrjs.com/docs/lunr.Builder.html#field
-    Object.entries(fields).forEach(function (_ref) {
-        var _ref2 = _slicedToArray(_ref, 2),
-            field = _ref2[0],
-            attributes = _ref2[1];
-
-        _this.field(field, attributes);
-    });
-
-    // remove the stemmer as it breaks some wildcard searches
-    // the performance will be worse but no big deal as long as we don't have too much data
-    // https://github.com/olivernn/lunr.js/issues/377#issuecomment-426380071
-    // possible other workaround https://github.com/hoelzro/tw-full-text-search/issues/9
-    // same pb https://github.com/olivernn/lunr.js/issues/421
-    this.pipeline.remove(lunr.stemmer);
-    this.searchPipeline.remove(lunr.stemmer);
-
-    documents.forEach(function (doc, i) {
-        doc["key"] = i;
-        _this.add(doc);
-        store[i] = doc;
-    }, this);
-});
-
 // https://stackoverflow.com/questions/3426404/create-a-hexadecimal-colour-based-on-a-string-with-javascript
 var stringToColour = function stringToColour(str) {
     var hash = 0;
@@ -51,10 +21,10 @@ var stringToColour = function stringToColour(str) {
     return colour;
 };
 
-var Tag = function Tag(_ref3) {
-    var tag = _ref3.tag,
-        index = _ref3.index,
-        color = _ref3.color;
+var Tag = function Tag(_ref) {
+    var tag = _ref.tag,
+        index = _ref.index,
+        color = _ref.color;
     return React.createElement(
         'div',
         { 'class': 'tag', style: {
@@ -72,15 +42,15 @@ var Tag = function Tag(_ref3) {
     );
 };
 
-var Result = function Result(_ref4) {
-    var doc = _ref4.doc;
+var Result = function Result(_ref2) {
+    var doc = _ref2.doc;
     return React.createElement(
         'div',
         { 'class': 'result' },
-        Object.entries(fields).map(function (_ref5) {
-            var _ref6 = _slicedToArray(_ref5, 2),
-                field = _ref6[0],
-                type = _ref6[1].type;
+        Object.entries(fields).map(function (_ref3) {
+            var _ref4 = _slicedToArray(_ref3, 2),
+                field = _ref4[0],
+                type = _ref4[1].type;
 
             switch (type) {
                 case "list":
@@ -122,7 +92,6 @@ var Result = function Result(_ref4) {
 };
 
 var MAX_RESULTS_DEFAULT = 10;
-var fullResults = idx.search("*");
 
 // https://reactjs.org/docs/hooks-state.html
 // https://stackoverflow.com/questions/53215067/how-can-i-bind-function-with-hooks-in-react
@@ -226,5 +195,45 @@ var SearchField = function SearchField() {
     );
 };
 
-var domContainer = document.querySelector('#root');
-ReactDOM.render(React.createElement(SearchField, null), domContainer);
+var store = {};
+var fullResults;
+var idx;
+var fields;
+
+fetch("https://raw.githubusercontent.com/StephGbzh/customta/master/data.json").then(function (response) {
+    return response.json();
+}).then(function (json) {
+    fields = json.fields;
+    var documents = json.documents;
+    idx = lunr(function () {
+        var _this = this;
+
+        this.ref("key");
+        // https://lunrjs.com/docs/lunr.Builder.html#field
+        Object.entries(fields).forEach(function (_ref5) {
+            var _ref6 = _slicedToArray(_ref5, 2),
+                field = _ref6[0],
+                attributes = _ref6[1];
+
+            _this.field(field, attributes);
+        });
+
+        // remove the stemmer as it breaks some wildcard searches
+        // the performance will be worse but no big deal as long as we don't have too much data
+        // https://github.com/olivernn/lunr.js/issues/377#issuecomment-426380071
+        // possible other workaround https://github.com/hoelzro/tw-full-text-search/issues/9
+        // same pb https://github.com/olivernn/lunr.js/issues/421
+        this.pipeline.remove(lunr.stemmer);
+        this.searchPipeline.remove(lunr.stemmer);
+
+        documents.forEach(function (doc, i) {
+            doc["key"] = i;
+            _this.add(doc);
+            store[i] = doc;
+        }, this);
+    });
+    fullResults = idx.search("*");
+
+    var domContainer = document.querySelector("#root");
+    ReactDOM.render(React.createElement(SearchField, null), domContainer);
+});
