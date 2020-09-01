@@ -28,6 +28,12 @@ The present repo is a demo with some (small amount of) arbitrary data. You will 
     - favicon.ico
 
 1. Modify data.js to put the data you are interested in
+    - add your data in the **documents** json array
+    - list the **fields** to take into account for the search
+    - the **order** is used to display each result and can be different from the one in **documents**
+    - the **type** of each field will determine how it is displayed
+    - the importance of a field can be tweaked through the **boost** value, default is 1
+
 1. Open index.html in your browser
 1. Start searching !
 
