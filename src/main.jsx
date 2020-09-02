@@ -34,6 +34,9 @@ const Tag = ({ tag, index, color }) => (
 const Result = ({ doc }) => (
     <div class="result">
         {Object.entries(fields).map(([field, { type }]) => {
+            if (!doc[field]) {
+                return null
+            }
             switch (type) {
                 case "list":
                     return <div class="result-list">

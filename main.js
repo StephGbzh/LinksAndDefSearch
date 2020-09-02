@@ -52,6 +52,9 @@ var Result = function Result(_ref2) {
                 field = _ref4[0],
                 type = _ref4[1].type;
 
+            if (!doc[field]) {
+                return null;
+            }
             switch (type) {
                 case "list":
                     return React.createElement(
