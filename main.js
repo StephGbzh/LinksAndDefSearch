@@ -204,7 +204,17 @@ var fullResults;
 var idx;
 var fields;
 
-fetch("https://raw.githubusercontent.com/StephGbzh/customta/master/data.json").then(function (response) {
+// https://stephgbzh.github.io/customta/?json=https://raw.githubusercontent.com/StephGbzh/customta/master/data.json
+var params = new URLSearchParams(window.location.search);
+var defaultJsonUrl;
+
+if (params.has('json')) {
+    defaultJsonUrl = params.get('json');
+} else {
+    defaultJsonUrl = "https://raw.githubusercontent.com/StephGbzh/customta/master/data.json";
+}
+
+fetch(defaultJsonUrl).then(function (response) {
     return response.json();
 }).then(function (json) {
     fields = json.fields;
