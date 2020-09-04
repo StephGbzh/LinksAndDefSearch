@@ -118,7 +118,7 @@ const SearchField = () => {
                     </span>
                 </div>
                 <div class="results-count">
-                    <span>{search.results.length} results</span>
+                    <span>{search.results.length} result{search.results.length == 1 ? "" : "s"}</span>
                 </div>
             </div>
             <br></br>

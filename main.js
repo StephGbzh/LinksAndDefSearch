@@ -178,7 +178,8 @@ var SearchField = function SearchField() {
                     'span',
                     null,
                     search.results.length,
-                    ' results'
+                    ' result',
+                    search.results.length == 1 ? "" : "s"
                 )
             )
         ),
