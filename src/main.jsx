@@ -1,5 +1,3 @@
-'use strict';
-
 const useState = React.useState
 const useCallback = React.useCallback
 const useEffect = React.useEffect
@@ -104,18 +102,27 @@ const SearchField = () => {
     return (
         <div class="main">
             <div class="top">
-                <div class="input">
-                    <input type="text" value={search.raw}
-                        onChange={handleChange} onKeyDown={handleKeyDown}
-                        placeholder="search"
-                        autoFocus="true"
-                        // https://stackoverflow.com/a/40235334
-                        ref={input => input && input.focus()} />
-                    <span class="clear" onClick={handleClear}>
-                        <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                <div class="top-line">
+                    <div class="input">
+                        <input type="text" value={search.raw}
+                            onChange={handleChange} onKeyDown={handleKeyDown}
+                            placeholder="search"
+                            autoFocus="true"
+                            // https://stackoverflow.com/questions/28889826/how-to-set-focus-on-an-input-field-after-rendering/40235334#40235334
+                            ref={input => input && input.focus()} />
+                        <span class="clear" onClick={handleClear}>
+                            <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="hamburger">
+                        <svg viewBox="0 0 100 80" width="40" height="40">
+                            <rect width="100" height="20" rx="8"></rect>
+                            <rect y="30" width="100" height="20" rx="8"></rect>
+                            <rect y="60" width="100" height="20" rx="8"></rect>
                         </svg>
-                    </span>
+                    </div>
                 </div>
                 <div class="results-count">
                     <span>{search.results.length} result{search.results.length == 1 ? "" : "s"}</span>

@@ -46,6 +46,11 @@ div.top
     border-bottom: thin solid lightgrey;
 }
 
+div.top-line
+{
+    display: inline-flex;
+}
+
 div.input
 {
     border: thin solid lightgrey;
@@ -64,6 +69,7 @@ input
     height: 32px;
     outline: none;
     width: 356px;
+    background-color: var(--bgcolor);
 }
 
 span.clear
@@ -75,7 +81,27 @@ span.clear
 
 span.clear > svg
 {
-    background-color: var(--fgcolor);
+    background-color: var(--bgcolor);
+}
+
+span.clear > svg > path
+{
+    fill: var(--fgcolor);
+}
+
+div.hamburger
+{
+    margin-left: 10px;
+}
+
+div.hamburger > svg
+{
+    background-color: var(--bgcolor);
+}
+
+div.hamburger > svg > rect
+{
+    fill: var(--fgcolor);
 }
 
 div.results-count

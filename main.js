@@ -1,5 +1,3 @@
-'use strict';
-
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 var useState = React.useState;
@@ -152,22 +150,37 @@ var SearchField = function SearchField() {
             { 'class': 'top' },
             React.createElement(
                 'div',
-                { 'class': 'input' },
-                React.createElement('input', { type: 'text', value: search.raw,
-                    onChange: handleChange, onKeyDown: handleKeyDown,
-                    placeholder: 'search',
-                    autoFocus: 'true'
-                    // https://stackoverflow.com/a/40235334
-                    , ref: function ref(input) {
-                        return input && input.focus();
-                    } }),
+                { 'class': 'top-line' },
                 React.createElement(
-                    'span',
-                    { 'class': 'clear', onClick: handleClear },
+                    'div',
+                    { 'class': 'input' },
+                    React.createElement('input', { type: 'text', value: search.raw,
+                        onChange: handleChange, onKeyDown: handleKeyDown,
+                        placeholder: 'search',
+                        autoFocus: 'true'
+                        // https://stackoverflow.com/questions/28889826/how-to-set-focus-on-an-input-field-after-rendering/40235334#40235334
+                        , ref: function ref(input) {
+                            return input && input.focus();
+                        } }),
+                    React.createElement(
+                        'span',
+                        { 'class': 'clear', onClick: handleClear },
+                        React.createElement(
+                            'svg',
+                            { focusable: 'false', xmlns: 'http://www.w3.org/2000/svg', viewBox: '0 0 24 24' },
+                            React.createElement('path', { d: 'M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z' })
+                        )
+                    )
+                ),
+                React.createElement(
+                    'div',
+                    { 'class': 'hamburger' },
                     React.createElement(
                         'svg',
-                        { focusable: 'false', xmlns: 'http://www.w3.org/2000/svg', viewBox: '0 0 24 24' },
-                        React.createElement('path', { d: 'M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z' })
+                        { viewBox: '0 0 100 80', width: '40', height: '40' },
+                        React.createElement('rect', { width: '100', height: '20', rx: '8' }),
+                        React.createElement('rect', { y: '30', width: '100', height: '20', rx: '8' }),
+                        React.createElement('rect', { y: '60', width: '100', height: '20', rx: '8' })
                     )
                 )
             ),
