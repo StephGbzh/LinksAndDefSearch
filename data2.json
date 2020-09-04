@@ -1,0 +1,25 @@
+{
+    "fields": {
+      "name": { "type": "text" },
+      "wins": { "type": "text" }
+    },
+    "documents": [
+      {
+        "name": "Brazil",
+        "wins": "5"
+      },
+      {
+        "name": "France",
+        "wins": "2"
+      },
+      {
+        "name": "Germany",
+        "wins": "4"
+      },
+      {
+        "name": "Spain",
+        "wins": "1"
+      }
+    ]
+  }
+  
