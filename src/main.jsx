@@ -31,7 +31,7 @@ const Tag = ({ tag, index, color }) => (
 
 const Result = ({ doc }) => (
     <div class="result">
-        {Object.entries(fields).map(([field, { type }]) => {
+        {Object.entries(fields).map(([field, { type, prefix }]) => {
             if (!doc[field]) {
                 return null
             }
@@ -46,7 +46,7 @@ const Result = ({ doc }) => (
                         <a href={doc[field]} target="_blank">{doc[field]}</a>
                     </div>
                 case "text":
-                    return <div>{doc[field]}</div>
+                    return <div>{`${prefix ? field + ": " : ""}${doc[field]}`}</div>
                 default:
                     return <div>Field "{field}" of unknown type: {type}</div>
             }
@@ -116,6 +116,7 @@ const SearchField = () => {
                             </svg>
                         </span>
                     </div>
+                    {/* https://css-tricks.com/snippets/svg/svg-hamburger-menu/ */}
                     <div class="hamburger">
                         <svg viewBox="0 0 100 80" width="40" height="40">
                             <rect width="100" height="20" rx="8"></rect>

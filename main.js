@@ -48,7 +48,9 @@ var Result = function Result(_ref2) {
         Object.entries(fields).map(function (_ref3) {
             var _ref4 = _slicedToArray(_ref3, 2),
                 field = _ref4[0],
-                type = _ref4[1].type;
+                _ref4$ = _ref4[1],
+                type = _ref4$.type,
+                prefix = _ref4$.prefix;
 
             if (!doc[field]) {
                 return null;
@@ -76,7 +78,7 @@ var Result = function Result(_ref2) {
                     return React.createElement(
                         'div',
                         null,
-                        doc[field]
+                        '' + (prefix ? field + ": " : "") + doc[field]
                     );
                 default:
                     return React.createElement(
