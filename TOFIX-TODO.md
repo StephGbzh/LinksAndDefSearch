@@ -38,6 +38,12 @@
 
 :black_square_button: Fetch data from elsewhere => e.g. urls on github
 
+:black_square_button: Take boost param into account
+
+:black_square_button: Order by fields: numeric, alphanumeric
+
+:black_square_button: Make list elements unwrappable => the colored square and text must stay on the same line
+
 <!--
 Markdown emojis:
 :white_large_square: :heavy_check_mark: :x: :black_square_button:
