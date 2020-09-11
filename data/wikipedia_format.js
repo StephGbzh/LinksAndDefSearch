@@ -9,36 +9,36 @@ const json = {
   fields: {
     "Nom, Prénom": { type: "text" },
     Nationalité: { type: "text" },
-    Saisons: { type: "list" },
+    Saisons: { type: "list", display: "(v) => `${v}-${v+1}`" },
     Poste: { type: "text" },
-    Matchs: { type: "text", prefix: true },
-    Buts: { type: "text", prefix: true },
+    Matchs: { type: "text", display: "(f,v) => `${f}: ${v}`" },
+    Buts: { type: "text", display: "(f,v) => `${f}: ${v}`" },
   },
   documents: [],
 };
 
-extractSeasons = (period) => {
+const extractYears = (period) => {
   // console.log("A", period);
   year1 = parseInt(period.substring(0, 4));
-  years = [`${year1}-${year1+1}`];
+  years = [year1];
   period = period.substring(4);
   while (period.length > 0) {
     if (period.charAt(0) == "-") {
       if (period.length == 1) {
-        for (let y = year1+1; y < new Date().getFullYear(); y++) {
-          years.push(`${y}-${y+1}`);
+        for (let y = year1+1; y <= new Date().getFullYear(); y++) {
+          years.push(y);
         }
         period = "";
       } else {
         year2 = parseInt(period.substring(1, 5));
         for (let y = year1+1; y < year2; y++) {
-          years.push(`${y}-${y+1}`);
+          years.push(y);
         }
         period = period.substring(5);
       }
     } else {
       year1 = parseInt(period.substring(0, 4));
-      years.push(`${year1}-${year1+1}`)
+      years.push(year1)
       period = period.substring(4);
     }
   }
@@ -59,7 +59,7 @@ jsonIn.tables.forEach((table) => {
 
       if (columnName == "Période") {
         // doc["Période"] = columnValue
-        doc["Saisons"] = extractSeasons(columnValue)
+        doc["Saisons"] = extractYears(columnValue)
       } else {
         // remove annotations: "Aoued[2] *"" becomes just "Aoued"
         doc[columnName] = columnValue.replace(/\s*(\[\d+\],?)*\s*\**\s*$/, "");

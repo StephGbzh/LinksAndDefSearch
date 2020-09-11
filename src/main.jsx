@@ -17,20 +17,20 @@ const stringToColour = (str) => {
     return colour;
 }
 
-const Tag = ({ tag, index, color }) => (
+const Tag = ({ tag, index, color, display }) => (
     <div class="tag" style={{
         border: "thin solid " + color
     }}>
         <span class="tag-dot" style={{
             backgroundColor: color
         }}></span>
-        <span class="tag-text">{tag}</span>
+        <span class="tag-text">{display ? Function('"use strict";return (' + display + ')')()(tag) : tag}</span>
     </div>
 )
 
 const Result = ({ doc }) => (
     <div class="result">
-        {Object.entries(fields).map(([field, { type, prefix }]) => {
+        {Object.entries(fields).map(([field, { type, display }]) => {
             if (!doc[field]) {
                 return null
             }
@@ -38,14 +38,14 @@ const Result = ({ doc }) => (
                 case "list":
                     return <div class="result-list">
                         {doc[field].map((tag, i) =>
-                            <Tag key={tag} tag={tag} index={i} color={stringToColour(tag)} />)}
+                            <Tag key={tag} tag={tag} index={i} color={stringToColour(tag.toString())} display={display} />)}
                     </div>
                 case "link":
                     return <div class="result-link">
                         <a href={doc[field]} target="_blank">{doc[field]}</a>
                     </div>
                 case "text":
-                    return <div>{`${prefix ? field + ": " : ""}${doc[field]}`}</div>
+                    return <div>{`${display ? Function('"use strict";return (' + display + ')')()(field, doc[field]) : doc[field]}`}</div>
                 default:
                     return <div>Field "{field}" of unknown type: {type}</div>
             }

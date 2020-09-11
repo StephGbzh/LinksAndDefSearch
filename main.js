@@ -22,7 +22,8 @@ var stringToColour = function stringToColour(str) {
 var Tag = function Tag(_ref) {
     var tag = _ref.tag,
         index = _ref.index,
-        color = _ref.color;
+        color = _ref.color,
+        display = _ref.display;
     return React.createElement(
         'div',
         { 'class': 'tag', style: {
@@ -34,7 +35,7 @@ var Tag = function Tag(_ref) {
         React.createElement(
             'span',
             { 'class': 'tag-text' },
-            tag
+            display ? Function('"use strict";return (' + display + ')')()(tag) : tag
         )
     );
 };
@@ -49,7 +50,7 @@ var Result = function Result(_ref2) {
                 field = _ref4[0],
                 _ref4$ = _ref4[1],
                 type = _ref4$.type,
-                prefix = _ref4$.prefix;
+                display = _ref4$.display;
 
             if (!doc[field]) {
                 return null;
@@ -60,7 +61,7 @@ var Result = function Result(_ref2) {
                         'div',
                         { 'class': 'result-list' },
                         doc[field].map(function (tag, i) {
-                            return React.createElement(Tag, { key: tag, tag: tag, index: i, color: stringToColour(tag) });
+                            return React.createElement(Tag, { key: tag, tag: tag, index: i, color: stringToColour(tag.toString()), display: display });
                         })
                     );
                 case "link":
@@ -77,7 +78,7 @@ var Result = function Result(_ref2) {
                     return React.createElement(
                         'div',
                         null,
-                        '' + (prefix ? field + ": " : "") + doc[field]
+                        '' + (display ? Function('"use strict";return (' + display + ')')()(field, doc[field]) : doc[field])
                     );
                 default:
                     return React.createElement(
