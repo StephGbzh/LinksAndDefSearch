@@ -75,24 +75,24 @@ const SearchField = () => {
                 reworkedSearch == "" ? fullResults : idx.search(reworkedSearch)
         })
         setMaxResults(MAX_RESULTS_DEFAULT)
-    }, [])
+    }, [search, maxResults])
 
     const handleKeyDown = useCallback((event) => {
         if (event.keyCode == 27) { // ESC
             event.preventDefault()
             clearSearchBar()
         }
-    }, [])
+    }, [search, maxResults])
 
     const handleMoreClick = useCallback((event) => {
         event.preventDefault()
         setMaxResults(maxResults + MAX_RESULTS_DEFAULT)
-    }, [])
+    }, [maxResults])
 
     const handleClear = useCallback((event) => {
         event.preventDefault()
         clearSearchBar()
-    }, [])
+    }, [search, maxResults])
 
     const clearSearchBar = () => {
         setSearch({ raw: "", reworked: "", results: fullResults })

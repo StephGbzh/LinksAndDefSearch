@@ -119,7 +119,7 @@ var SearchField = function SearchField() {
             results: reworkedSearch == search.reworked ? search.results : reworkedSearch == "" ? fullResults : idx.search(reworkedSearch)
         });
         setMaxResults(MAX_RESULTS_DEFAULT);
-    }, []);
+    }, [search, maxResults]);
 
     var handleKeyDown = useCallback(function (event) {
         if (event.keyCode == 27) {
@@ -127,17 +127,17 @@ var SearchField = function SearchField() {
             event.preventDefault();
             clearSearchBar();
         }
-    }, []);
+    }, [search, maxResults]);
 
     var handleMoreClick = useCallback(function (event) {
         event.preventDefault();
         setMaxResults(maxResults + MAX_RESULTS_DEFAULT);
-    }, []);
+    }, [maxResults]);
 
     var handleClear = useCallback(function (event) {
         event.preventDefault();
         clearSearchBar();
-    }, []);
+    }, [search, maxResults]);
 
     var clearSearchBar = function clearSearchBar() {
         setSearch({ raw: "", reworked: "", results: fullResults });
