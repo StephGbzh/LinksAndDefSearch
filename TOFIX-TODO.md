@@ -38,9 +38,9 @@
 
 :heavy_check_mark: Fetch data from elsewhere => e.g. urls on github
 
-:black_square_button: Make possible to switch between datasets
+:heavy_check_mark: Take boost param into account
 
-:black_square_button: Take boost param into account
+:black_square_button: Make possible to switch between datasets
 
 :black_square_button: Order by fields: numeric, alphanumeric
 

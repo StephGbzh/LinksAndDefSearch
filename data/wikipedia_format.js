@@ -9,7 +9,7 @@ const json = {
   fields: {
     "Nom, Prénom": { type: "text" },
     Nationalité: { type: "text" },
-    Saisons: { type: "list", display: "(v) => `${v}-${v+1}`" },
+    Saisons: { type: "list", boost:100, display: "(v) => `${v}-${v+1}`" },
     Poste: { type: "text" },
     Matchs: { type: "text", display: "(f,v) => `${f}: ${v}`" },
     Buts: { type: "text", display: "(f,v) => `${f}: ${v}`" },
