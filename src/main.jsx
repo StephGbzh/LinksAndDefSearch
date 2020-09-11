@@ -19,8 +19,7 @@ const stringToColour = (str) => {
 
 const Tag = ({ tag, index, color }) => (
     <div class="tag" style={{
-        border: "thin solid " + color,
-        marginLeft: (index == 0 ? "0" : "2px")
+        border: "thin solid " + color
     }}>
         <span class="tag-dot" style={{
             backgroundColor: color

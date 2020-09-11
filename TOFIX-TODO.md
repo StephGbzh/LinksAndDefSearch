@@ -32,17 +32,17 @@
 
 :heavy_check_mark: Dark theme
 
-:black_square_button: Test with more data
+:heavy_check_mark: Test with more data
+
+:heavy_check_mark: Make list elements unwrappable => the colored square and text must stay on the same line
+
+:heavy_check_mark: Fetch data from elsewhere => e.g. urls on github
 
 :black_square_button: Make possible to switch between datasets
-
-:black_square_button: Fetch data from elsewhere => e.g. urls on github
 
 :black_square_button: Take boost param into account
 
 :black_square_button: Order by fields: numeric, alphanumeric
-
-:black_square_button: Make list elements unwrappable => the colored square and text must stay on the same line
 
 <!--
 Markdown emojis:

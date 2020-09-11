@@ -121,11 +121,6 @@ div.result
     margin: 20px auto;
 }
 
-div.result-list
-{
-    display: inline-flex;
-}
-
 div.result-link
 {
     margin: 3px 0;
@@ -134,13 +129,16 @@ div.result-link
 div.tag
 {
     border-radius: 5px;
+    white-space: nowrap;
+    display: inline-block;
+    margin: 2px 4px 2px 0;
 }
 
 span.tag-dot
 {
     width: 10px;
     height: 10px;
-    margin-left: 2px;
+    margin: 0 0 1px 4px;
     display: inline-block;
 }
 

@@ -26,8 +26,7 @@ var Tag = function Tag(_ref) {
     return React.createElement(
         'div',
         { 'class': 'tag', style: {
-                border: "thin solid " + color,
-                marginLeft: index == 0 ? "0" : "2px"
+                border: "thin solid " + color
             } },
         React.createElement('span', { 'class': 'tag-dot', style: {
                 backgroundColor: color
