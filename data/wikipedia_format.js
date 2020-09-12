@@ -1,12 +1,13 @@
 var fs = require("fs");
 
-var jsonRaw = fs.readFileSync("response_1599679488244.json");
+var jsonRaw = fs.readFileSync("response_1599940228803.json");
 var jsonIn = JSON.parse(jsonRaw);
 
 // add fields description
 // init documents
 const json = {
   fields: {
+    "Nom": { type: "text" },
     "Nom, Prénom": { type: "text" },
     Nationalité: { type: "text" },
     Saisons: { type: "list", boost:100, display: "(v) => `${v}-${v+1}`" },
