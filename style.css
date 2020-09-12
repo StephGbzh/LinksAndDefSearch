@@ -70,6 +70,7 @@ input
     outline: none;
     width: 356px;
     background-color: var(--bgcolor);
+    color: var(--fgcolor);
 }
 
 span.clear
