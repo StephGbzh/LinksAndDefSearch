@@ -3,23 +3,23 @@
 ## Overview
 
 - Static single webpage with search-as-you-type capability on any data you provide
-- POC (ie this very repository) runs on Github-Pages at <https://stephgbzh.github.io/customta/?json=https://raw.githubusercontent.com/StephGbzh/customta/master/data.json>
-  - when the search field is empty, you can see all unfiltered results (within a limit and a "Load more" button)
-  - type ESC in the search field to clear your last search
-- Data is provided in the URL as a json file with a specific format, any change is reflected upon refresh (F5) of the HTML page
+- Hosted on Github-Pages [here](https://stephgbzh.github.io/customta/?json=https://raw.githubusercontent.com/StephGbzh/customta/master/data.json)
+  - you can provide some other data by changing the json parameter in the url bar and setting it to another online json file (see below for details about the expected format)
+  - when the search field is empty, all unfiltered results are available (not all are shown at once but there is a "Load more" button if you scroll down to the bottom)
+  - type ESC or click the X in the search field to clear your last search
 - Locally the page to open is simply index.html and works the same way
 - Powered by [Lunr](https://lunrjs.com/) and [React](https://reactjs.org/)
 - Source code is in src/main.jsx (no need to change anything here if you just want to use the search)
 - [Babel](https://babeljs.io/) through npx transforms this jsx code to plain js (see further below for the exact command)
 - Tested with moderately small amounts of data (~1000 elements with 5 fields), bigger ones may be slow to handle
 
-## How to use
+## Json format
 
 You will need to build and host online a json containing:
 - a **documents** entry, the value being an array of the elements you want to search through
 - a short **fields** part describing the fields of these elements
-    - list only the fields from the **documents** elements you want to take into account for the search 
-    - the **order** you choose for the fields in the **fields** part will be used to display each result and can be different from the one in the **documents** elements
+    - list only the fields from the **documents** elements you want to take into account for the search, others will be ignored
+    - the **order** you choose for the fields in the **fields** part will be used to display each result and that order can be different from the one in the **documents** elements
     - the **type** of each field will determine how it is displayed
        + list: an array is expected, each value will be enclosed in a colored border and have a small color square before it
        + link: a clickable link will be generated
