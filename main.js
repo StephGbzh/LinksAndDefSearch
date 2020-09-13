@@ -11,10 +11,10 @@ var stringToColour = function stringToColour(str) {
         hash = str.charCodeAt(i) + ((hash << 5) - hash);
     }
     hash *= 100;
-    var colour = '#';
+    var colour = "#";
     for (var _i = 0; _i < 3; _i++) {
-        var value = hash >> _i * 8 & 0xFF;
-        colour += ('00' + value.toString(16)).substr(-2);
+        var value = hash >> _i * 8 & 0xff;
+        colour += ("00" + value.toString(16)).substr(-2);
     }
     return colour;
 };
@@ -25,17 +25,21 @@ var Tag = function Tag(_ref) {
         color = _ref.color,
         display = _ref.display;
     return React.createElement(
-        'div',
-        { 'class': 'tag', style: {
+        "div",
+        {
+            "class": "tag",
+            style: {
                 border: "thin solid " + color
             } },
-        React.createElement('span', { 'class': 'tag-dot', style: {
+        React.createElement("span", {
+            "class": "tag-dot",
+            style: {
                 backgroundColor: color
             } }),
         React.createElement(
-            'span',
-            { 'class': 'tag-text' },
-            display ? Function('"use strict";return (' + display + ')')()(tag) : tag
+            "span",
+            { "class": "tag-text" },
+            display ? Function('"use strict";return (' + display + ")")()(tag) : tag
         )
     );
 };
@@ -43,8 +47,8 @@ var Tag = function Tag(_ref) {
 var Result = function Result(_ref2) {
     var doc = _ref2.doc;
     return React.createElement(
-        'div',
-        { 'class': 'result' },
+        "div",
+        { "class": "result" },
         Object.entries(fields).map(function (_ref3) {
             var _ref4 = _slicedToArray(_ref3, 2),
                 field = _ref4[0],
@@ -58,35 +62,41 @@ var Result = function Result(_ref2) {
             switch (type) {
                 case "list":
                     return React.createElement(
-                        'div',
-                        { 'class': 'result-list' },
+                        "div",
+                        { "class": "result-list" },
                         doc[field].map(function (tag, i) {
-                            return React.createElement(Tag, { key: tag, tag: tag, index: i, color: stringToColour(tag.toString()), display: display });
+                            return React.createElement(Tag, {
+                                key: tag,
+                                tag: tag,
+                                index: i,
+                                color: stringToColour(tag.toString()),
+                                display: display
+                            });
                         })
                     );
                 case "link":
                     return React.createElement(
-                        'div',
-                        { 'class': 'result-link' },
+                        "div",
+                        { "class": "result-link" },
                         React.createElement(
-                            'a',
-                            { href: doc[field], target: '_blank' },
+                            "a",
+                            { href: doc[field], target: "_blank" },
                             doc[field]
                         )
                     );
                 case "text":
                     return React.createElement(
-                        'div',
+                        "div",
                         null,
-                        '' + (display ? Function('"use strict";return (' + display + ')')()(field, doc[field]) : doc[field])
+                        "" + (display ? Function('"use strict";return (' + display + ")")()(field, doc[field]) : doc[field])
                     );
                 default:
                     return React.createElement(
-                        'div',
+                        "div",
                         null,
-                        'Field "',
+                        "Field \"",
                         field,
-                        '" of unknown type: ',
+                        "\" of unknown type: ",
                         type
                     );
             }
@@ -100,7 +110,11 @@ var MAX_RESULTS_DEFAULT = 10;
 // https://stackoverflow.com/questions/53215067/how-can-i-bind-function-with-hooks-in-react
 // https://reactjs.org/docs/hooks-reference.html#usecallback
 var SearchField = function SearchField() {
-    var _useState = useState({ raw: '', reworked: '', results: fullResults }),
+    var _useState = useState({
+        raw: "",
+        reworked: "",
+        results: fullResults
+    }),
         _useState2 = _slicedToArray(_useState, 2),
         search = _useState2[0],
         setSearch = _useState2[1];
@@ -145,59 +159,63 @@ var SearchField = function SearchField() {
     };
 
     return React.createElement(
-        'div',
-        { 'class': 'main' },
+        "div",
+        { "class": "main" },
         React.createElement(
-            'div',
-            { 'class': 'top' },
+            "div",
+            { "class": "top" },
             React.createElement(
-                'div',
-                { 'class': 'top-line' },
+                "div",
+                { "class": "top-line" },
                 React.createElement(
-                    'div',
-                    { 'class': 'input' },
-                    React.createElement('input', { type: 'text', value: search.raw,
-                        onChange: handleChange, onKeyDown: handleKeyDown,
-                        placeholder: 'search',
-                        autoFocus: 'true'
+                    "div",
+                    { "class": "input" },
+                    React.createElement("input", {
+                        type: "text",
+                        value: search.raw,
+                        onChange: handleChange,
+                        onKeyDown: handleKeyDown,
+                        placeholder: "search",
+                        autoFocus: "true"
                         // https://stackoverflow.com/questions/28889826/how-to-set-focus-on-an-input-field-after-rendering/40235334#40235334
                         , ref: function ref(input) {
                             return input && input.focus();
-                        } }),
+                        }
+                    }),
                     React.createElement(
-                        'span',
-                        { 'class': 'clear', onClick: handleClear },
+                        "span",
+                        { "class": "clear", onClick: handleClear },
                         React.createElement(
-                            'svg',
-                            { focusable: 'false', xmlns: 'http://www.w3.org/2000/svg', viewBox: '0 0 24 24' },
-                            React.createElement('path', { d: 'M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z' })
+                            "svg",
+                            { focusable: "false", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 24 24" },
+                            React.createElement("path", { d: "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" })
                         )
                     )
                 )
             ),
             React.createElement(
-                'div',
-                { 'class': 'results-count' },
+                "div",
+                { "class": "results-count" },
                 React.createElement(
-                    'span',
+                    "span",
                     null,
                     search.results.length,
-                    ' result',
+                    " result",
                     search.results.length == 1 ? "" : "s"
                 )
             )
         ),
-        React.createElement('br', null),
+        React.createElement("br", null),
         React.createElement(
-            'div',
-            { 'class': 'results' },
+            "div",
+            { "class": "results" },
             search.results.slice(0, maxResults).map(function (r) {
                 return React.createElement(Result, { key: r.ref, doc: store[r.ref] });
             }),
             search.results.length > maxResults ? React.createElement(
-                'button',
-                { 'class': 'load-more', onClick: handleMoreClick },
-                'Load more results'
+                "button",
+                { "class": "load-more", onClick: handleMoreClick },
+                "Load more results"
             ) : null
         )
     );
@@ -212,8 +230,8 @@ var fields;
 var params = new URLSearchParams(window.location.search);
 var defaultJsonUrl;
 
-if (params.has('json')) {
-    defaultJsonUrl = params.get('json');
+if (params.has("json")) {
+    defaultJsonUrl = params.get("json");
 } else {
     defaultJsonUrl = "https://raw.githubusercontent.com/StephGbzh/customta/master/data.json";
 }
