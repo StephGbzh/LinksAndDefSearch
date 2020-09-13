@@ -90,21 +90,6 @@ span.clear > svg > path
     fill: var(--fgcolor);
 }
 
-div.hamburger
-{
-    margin-left: 10px;
-}
-
-div.hamburger > svg
-{
-    background-color: var(--bgcolor);
-}
-
-div.hamburger > svg > rect
-{
-    fill: var(--fgcolor);
-}
-
 div.results-count
 {
     margin-top: 5px;

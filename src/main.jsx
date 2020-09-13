@@ -115,14 +115,6 @@ const SearchField = () => {
                             </svg>
                         </span>
                     </div>
-                    {/* https://css-tricks.com/snippets/svg/svg-hamburger-menu/ */}
-                    {/* <div class="hamburger">
-                        <svg viewBox="0 0 100 80" width="40" height="40">
-                            <rect width="100" height="20" rx="8"></rect>
-                            <rect y="30" width="100" height="20" rx="8"></rect>
-                            <rect y="60" width="100" height="20" rx="8"></rect>
-                        </svg>
-                    </div> */}
                 </div>
                 <div class="results-count">
                     <span>{search.results.length} result{search.results.length == 1 ? "" : "s"}</span>
