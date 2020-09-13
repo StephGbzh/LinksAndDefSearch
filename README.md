@@ -16,19 +16,20 @@
 ## Json format
 
 You will need to build and host online a json containing:
+
 - a **documents** entry, the value being an array of the elements you want to search through
 - a short **fields** part describing the fields of these elements
-    - list only the fields from the **documents** elements you want to take into account for the search, others will be ignored
-    - the **order** you choose for the fields in the **fields** part will be used to display each result and that order can be different from the one in the **documents** elements
-    - the **type** of each field will determine how it is displayed
-       + list: an array is expected, each value will be enclosed in a colored border and have a small color square before it
-       + link: a clickable link will be generated
-       + text: the element as a simple string of characters
-    - the importance of a field for the search can be tweaked through the **boost** value, default is 1, increase it to make this field more important than others
+  - list only the fields from the **documents** elements you want to take into account for the search, others will be ignored
+  - the **order** you choose for the fields in the **fields** part will be used to display each result and that order can be different from the one in the **documents** elements
+  - the **type** of each field will determine how it is displayed
+    - list: an array is expected, each value will be enclosed in a colored border and have a small color square before it
+    - link: a clickable link will be generated
+    - text: the element as a simple string of characters
+  - the importance of a field for the search can be tweaked through the **boost** value, default is 1, increase it to make this field more important than others
 
 Look at <https://github.com/StephGbzh/customta/blob/master/data.json> for an example.
 
-### Locally
+## Use locally
 
 1. Clone the repository, you will need these files:
     - index.html
@@ -41,7 +42,17 @@ Look at <https://github.com/StephGbzh/customta/blob/master/data.json> for an exa
 1. Open index.html in your browser
 1. Start searching !
 
-### Hosted on GitHub
+You can also serve the files from a local server, for example with a line of python:
+
+```sh
+python -m SimpleHTTPServer 8000
+```
+
+Or rather a few lines in a [script](https://stackoverflow.com/a/21957017) to handle any CORS problem.
+
+Then open <http://localhost:8000/?json=http://localhost:8000/data.json>
+
+## Use hosted on GitHub
 
 1. Fork the repository.
 1. Go to your repo Settings > Options > GitHub Pages > Source: choose branch = master and folder = / (root)
@@ -49,6 +60,8 @@ Look at <https://github.com/StephGbzh/customta/blob/master/data.json> for an exa
 1. Access this site and start searching !
 
 ## JS Search Engines
+
+Several search engines have been written in Javascript, here are those that were considered, along with some notes that helped choose one among them.
 
 ### [LUNR](https://lunrjs.com/)
 
@@ -177,7 +190,7 @@ For development, add these scripts:
 <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.min.js" crossorigin></script>
 ```
 
-Add minified scripts for react & react-dom
+For production, add minified scripts for react & react-dom:
 
 ```js
 <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
@@ -190,7 +203,7 @@ Add JSX to a Project (node.js must be installed)
 
 `npm install babel-cli@6 babel-preset-react-app@3`
 
-Create a folder `src` and start the automatic watcher:
+Create a folder `src` and start the automatic watcher that will transform the jsx files in js everytime the file changes:
 
 `npx babel --watch src --out-dir . --presets react-app/prod`
 

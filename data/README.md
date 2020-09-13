@@ -1,8 +1,12 @@
-# Example of data
+# Examples of data
 
-## Football players
+Some datasets in json format can found [here](https://github.com/jdorfman/Awesome-JSON-Datasets).
 
-<https://fr.wikipedia.org/wiki/Liste_des_joueurs_du_Stade_rennais_football_club>
+## Stade Rennais football players
+
+Source: <https://fr.wikipedia.org/wiki/Liste_des_joueurs_du_Stade_rennais_football_club>
+
+760 entries, < 100 kB and 6 fields per entry.
 
 ### Fields
 
@@ -68,6 +72,26 @@ But not powerful enough to do everything ...
 
 #### Node.js
 
-Write a js script that loads the original json and writes a new one with all the desired modifications:
+Write a js script that loads the original json and writes a json file with all the desired modifications:
 
 `node wikipedia_format.js`
+
+## Movies
+
+Source: <https://raw.githubusercontent.com/prust/wikipedia-movie-data/master/movies.json>
+
+28795 entries, > 3 MB and 4 fields per entry.
+
+```json
+"fields": {
+  "title":{ "type": "text" },
+  "year":{ "type": "text" },
+  "cast":{ "type": "list" },
+  "genre":{ "type": "list" }
+}
+```
+
+The file is quite long to load ~20 seconds. The search can be slow if the number of results is > ~300.
+
+- [Can I limit the number of returned results?](https://github.com/olivernn/lunr.js/issues/135)
+- [Lunr with a large index (800,000 items)](https://github.com/olivernn/lunr.js/issues/222)

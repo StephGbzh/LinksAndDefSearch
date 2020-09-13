@@ -16,7 +16,9 @@
 
 :heavy_check_mark: Add possibility to add boost to fields
 
-:heavy_check_mark: Make the page mobile friendly (for now the font is too small and evrything is packed on the left)
+:heavy_check_mark: Make the page mobile friendly (for now the font is too small and everything is packed on the left)
+
+- <https://search.google.com/test/mobile-friendly>  => Page is mobile friendly
 
 :x: Minify main js file ? No, the size is ridiculous compared to the minified react-dom js (9 kB vs 116 kB)
 
