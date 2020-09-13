@@ -28,11 +28,11 @@
 
 :heavy_check_mark: Search bar too wide on mobile
 
-:x: Remove React => Vue.js ? No framework ? (and bring back minify subject...) => no need for now
+:x: Remove React => Vue.js, Svelte ? No framework ? (and bring back minify subject...) => no need for now
 
 :heavy_check_mark: Dark theme
 
-:heavy_check_mark: Test with more data
+:heavy_check_mark: Test with more data => 760 elements
 
 :heavy_check_mark: Make list elements unwrappable => the colored square and text must stay on the same line
 
@@ -40,7 +40,16 @@
 
 :heavy_check_mark: Take boost param into account
 
-:black_square_button: Make possible to switch between datasets
+:heavy_check_mark: Make possible to switch between datasets
+
+- already possible by changing the url <https://stephgbzh.github.io/customta/?json=https://github.com/StephGbzh/customta/raw/master/data.json>
+- let's keep the options/settings at a minimum, none as of now being ideal
+
+:black_square_button: Filter, scroll down, load more, scroll down again then modify the search => the list is reduced back to the default results count but we should also scroll back up to the top of the page
+
+:black_square_button: Switch theme light <-> dark
+
+:black_square_button: Test with even more data => tens of thousands elements and files > 10 MB
 
 :black_square_button: Order by fields: numeric, alphanumeric
 
