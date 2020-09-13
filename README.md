@@ -3,46 +3,47 @@
 ## Overview
 
 - Static single webpage with search-as-you-type capability on any data you provide
-- POC (ie this very repository) runs on Github-Pages at <https://stephgbzh.github.io/customta/>
+- POC (ie this very repository) runs on Github-Pages at <https://stephgbzh.github.io/customta/?json=https://raw.githubusercontent.com/StephGbzh/customta/master/data.json>
   - when the search field is empty, you can see all unfiltered results (within a limit and a "Load more" button)
   - type ESC in the search field to clear your last search
-- Data is set in data.js as a simple json array, any change is reflected upon refresh (F5) of the HTML page (give Github a few seconds to automatically deploy the new version)
+- Data is provided in the URL as a json file with a specific format, any change is reflected upon refresh (F5) of the HTML page
 - Locally the page to open is simply index.html and works the same way
 - Powered by [Lunr](https://lunrjs.com/) and [React](https://reactjs.org/)
 - Source code is in src/main.jsx (no need to change anything here if you just want to use the search)
 - [Babel](https://babeljs.io/) through npx transforms this jsx code to plain js (see further below for the exact command)
-- Tested only with small amounts of data, bigger ones may be slow to handle
+- Tested with moderately small amounts of data (~1000 elements with 5 fields), bigger ones may be slow to handle
 
 ## How to use
 
-The present repo is a demo with some (small amount of) arbitrary data. You will need to clone or fork it to customize the data you want to be searchable.
+You will need to build and host online a json containing:
+- a **documents** entry, the value being an array of the elements you want to search through
+- a short **fields** part describing the fields of these elements
+    - list only the fields from the **documents** elements you want to take into account for the search 
+    - the **order** you choose for the fields in the **fields** part will be used to display each result and can be different from the one in the **documents** elements
+    - the **type** of each field will determine how it is displayed
+       + list: an array is expected, each value will be enclosed in a colored border and have a small color square before it
+       + link: a clickable link will be generated
+       + text: the element as a simple string of characters
+    - the importance of a field for the search can be tweaked through the **boost** value, default is 1, increase it to make this field more important than others
+
+Look at <https://github.com/StephGbzh/customta/blob/master/data.json> for an example.
 
 ### Locally
 
 1. Clone the repository, you will need these files:
     - index.html
     - style.css
-    - data.js
     - main.js
     - libs/lunr@2.3.8.min.js
     - libs/react@16.13.1.production.min.js
     - libs/react-dom@16.13.1.production.min.js
     - favicon.ico
-
-1. Modify data.js to put the data you are interested in
-    - add your data in the **documents** json array
-    - list the **fields** to take into account for the search
-    - the **order** is used to display each result and can be different from the one in **documents**
-    - the **type** of each field will determine how it is displayed
-    - the importance of a field can be tweaked through the **boost** value, default is 1
-
 1. Open index.html in your browser
 1. Start searching !
 
 ### Hosted on GitHub
 
 1. Fork the repository.
-1. Modify data.js to put the data you are interested in
 1. Go to your repo Settings > Options > GitHub Pages > Source: choose branch = master and folder = / (root)
 1. This will create a website hosted on GitHub (you may need a small delay for it to be created + a refresh of the page to get the address)
 1. Access this site and start searching !
