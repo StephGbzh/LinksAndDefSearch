@@ -104,6 +104,25 @@ var Result = function Result(_ref2) {
     );
 };
 
+var InfosCommands = function InfosCommands(_ref5) {
+    var search = _ref5.search;
+    return React.createElement(
+        "div",
+        { "class": "infos-commands" },
+        React.createElement(
+            "div",
+            { "class": "results-count" },
+            React.createElement(
+                "span",
+                null,
+                search.results.length,
+                " result",
+                search.results.length == 1 ? "" : "s"
+            )
+        )
+    );
+};
+
 var MAX_RESULTS_DEFAULT = 10;
 
 // https://reactjs.org/docs/hooks-state.html
@@ -193,17 +212,7 @@ var SearchField = function SearchField() {
                     )
                 )
             ),
-            React.createElement(
-                "div",
-                { "class": "results-count" },
-                React.createElement(
-                    "span",
-                    null,
-                    search.results.length,
-                    " result",
-                    search.results.length == 1 ? "" : "s"
-                )
-            )
+            React.createElement(InfosCommands, { search: search })
         ),
         React.createElement("br", null),
         React.createElement(
@@ -246,10 +255,10 @@ fetch(defaultJsonUrl).then(function (response) {
 
         this.ref("key");
         // https://lunrjs.com/docs/lunr.Builder.html#field
-        Object.entries(fields).forEach(function (_ref5) {
-            var _ref6 = _slicedToArray(_ref5, 2),
-                field = _ref6[0],
-                attributes = _ref6[1];
+        Object.entries(fields).forEach(function (_ref6) {
+            var _ref7 = _slicedToArray(_ref6, 2),
+                field = _ref7[0],
+                attributes = _ref7[1];
 
             _this.field(field, attributes);
         });

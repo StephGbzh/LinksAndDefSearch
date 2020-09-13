@@ -80,6 +80,17 @@ const Result = ({ doc }) => (
     </div>
 )
 
+const InfosCommands = ({ search }) => (
+    <div class="infos-commands">
+        <div class="results-count">
+            <span>
+                {search.results.length} result
+                {search.results.length == 1 ? "" : "s"}
+            </span>
+        </div>
+    </div>
+)
+
 const MAX_RESULTS_DEFAULT = 10
 
 // https://reactjs.org/docs/hooks-state.html
@@ -167,11 +178,7 @@ const SearchField = () => {
                         </span>
                     </div>
                 </div>
-                <div class="results-count">
-                    <span>
-                        {search.results.length} result{search.results.length == 1 ? "" : "s"}
-                    </span>
-                </div>
+                <InfosCommands search={search} />
             </div>
             <br></br>
 
