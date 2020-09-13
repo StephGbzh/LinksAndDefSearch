@@ -120,6 +120,7 @@ const SearchField = () => {
                         : idx.search(reworkedSearch),
             })
             setMaxResults(MAX_RESULTS_DEFAULT)
+            window.scrollTo(0,0)
         },
         [search, maxResults],
     )

@@ -152,6 +152,7 @@ var SearchField = function SearchField() {
             results: reworkedSearch == search.reworked ? search.results : reworkedSearch == "" ? fullResults : idx.search(reworkedSearch)
         });
         setMaxResults(MAX_RESULTS_DEFAULT);
+        window.scrollTo(0, 0);
     }, [search, maxResults]);
 
     var handleKeyDown = useCallback(function (event) {

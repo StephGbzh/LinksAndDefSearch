@@ -45,7 +45,16 @@
 - already possible by changing the url <https://stephgbzh.github.io/customta/?json=https://github.com/StephGbzh/customta/raw/master/data.json>
 - let's keep the options/settings at a minimum, none as of now being ideal
 
-:black_square_button: Filter, scroll down, load more, scroll down again then modify the search => the list is reduced back to the default results count but we should also scroll back up to the top of the page
+:heavy_check_mark: Filter, scroll down, load more, scroll down again then modify the search => the list is reduced back to the default results count but we should also scroll back up to the top of the page
+
+:black_square_button: Make possible to load local json files
+
+- not through `file:///` urls => forbidden by browsers
+- file picker window
+
+:black_square_button: Handle faulty json with an error message below the top bar
+
+:black_square_button: Default page should explain how to provide data as a json url in the location bar
 
 :black_square_button: Switch theme light <-> dark
 
