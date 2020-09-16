@@ -28,7 +28,7 @@ const Tag = ({ tag, index, color, display }) => (
             style={{
                 backgroundColor: color,
             }}></span>
-        <span class="tag-text">{display ? Function('"use strict";return (' + display + ")")()(tag) : tag}</span>
+        <span class="tag-text">{display ? display.replace(/\{value\}/g, tag) : tag}</span>
     </div>
 )
 
@@ -65,7 +65,7 @@ const Result = ({ doc }) => (
                     return (
                         <div>{`${
                             display
-                                ? Function('"use strict";return (' + display + ")")()(field, doc[field])
+                                ? display.replace(/\{name\}/g, field).replace(/\{value\}/g, doc[field])
                                 : doc[field]
                         }`}</div>
                     )

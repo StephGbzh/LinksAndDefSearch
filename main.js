@@ -39,7 +39,7 @@ var Tag = function Tag(_ref) {
         React.createElement(
             "span",
             { "class": "tag-text" },
-            display ? Function('"use strict";return (' + display + ")")()(tag) : tag
+            display ? display.replace(/\{value\}/g, tag) : tag
         )
     );
 };
@@ -88,7 +88,7 @@ var Result = function Result(_ref2) {
                     return React.createElement(
                         "div",
                         null,
-                        "" + (display ? Function('"use strict";return (' + display + ")")()(field, doc[field]) : doc[field])
+                        "" + (display ? display.replace(/\{name\}/g, field).replace(/\{value\}/g, doc[field]) : doc[field])
                     );
                 default:
                     return React.createElement(
