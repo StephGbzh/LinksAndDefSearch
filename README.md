@@ -3,7 +3,7 @@
 ## Overview
 
 - Static single webpage with search-as-you-type capability on any data you provide
-- Hosted on Github-Pages [here](https://stephgbzh.github.io/customta/?json=https://raw.githubusercontent.com/StephGbzh/customta/master/data.json)
+- Hosted on Github-Pages [here](https://stephgbzh.github.io/customta/?json=https://raw.githubusercontent.com/StephGbzh/customta/master/data/search_engines.json)
   - you can provide some other data by changing the json parameter in the url bar and setting it to another online json file (see below for details about the expected format)
   - when the search field is empty, all unfiltered results are available (not all are shown at once but there is a "Load more" button if you scroll down to the bottom)
   - type ESC or click the X in the search field to clear your last search
@@ -27,7 +27,7 @@ You will need to build and host online a json containing:
     - text: the element as a simple string of characters
   - the importance of a field for the search can be tweaked through the **boost** value, default is 1, increase it to make this field more important than others
 
-Look at <https://github.com/StephGbzh/customta/blob/master/data.json> for an example.
+Look at <https://github.com/StephGbzh/customta/blob/master/data/search_engines.json> for an example.
 
 ## Use locally
 
@@ -50,7 +50,7 @@ python -m SimpleHTTPServer 8000
 
 Or rather a few lines in a [script](https://stackoverflow.com/a/21957017) to handle any CORS problem.
 
-Then open <http://localhost:8000/?json=http://localhost:8000/data.json>
+Then open <http://localhost:8000/?json=http://localhost:8000/data/search_engines.json>
 
 ## Use hosted on GitHub
 

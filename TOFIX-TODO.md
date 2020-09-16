@@ -44,7 +44,7 @@
 
 :heavy_check_mark: Make possible to switch between datasets
 
-- already possible by changing the url <https://stephgbzh.github.io/customta/?json=https://github.com/StephGbzh/customta/raw/master/data.json>
+- already possible by changing the url <https://stephgbzh.github.io/customta/?json=https://github.com/StephGbzh/customta/raw/master/data/search_engines.json>
 - let's keep the options/settings at a minimum, none as of now being ideal
 
 :heavy_check_mark: Filter, scroll down, load more, scroll down again then modify the search => the list is reduced back to the default results count but we should also scroll back up to the top of the page

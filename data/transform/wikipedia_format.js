@@ -3,7 +3,7 @@
     const fetch = require("node-fetch")
     const process = require("process")
 
-    const rawDataFile = "rennes_players_wikipedia.json"
+    const rawDataFile = "../raw/rennes_players_wikipedia.json"
 
     let jsonIn
 
@@ -99,7 +99,7 @@
     //console.log(JSON.stringify(json))
 
     try {
-        fs.writeFileSync("rennes_players.json", JSON.stringify(json))
+        fs.writeFileSync("../rennes_players.json", JSON.stringify(json))
     } catch (err) {
         console.error(err)
     }

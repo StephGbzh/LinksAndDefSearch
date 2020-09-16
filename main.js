@@ -236,14 +236,14 @@ var fullResults;
 var idx;
 var fields;
 
-// https://stephgbzh.github.io/customta/?json=https://raw.githubusercontent.com/StephGbzh/customta/master/data.json
+// https://stephgbzh.github.io/customta/?json=https://raw.githubusercontent.com/StephGbzh/customta/master/data/search_engines.json
 var params = new URLSearchParams(window.location.search);
 var defaultJsonUrl;
 
 if (params.has("json")) {
     defaultJsonUrl = params.get("json");
 } else {
-    defaultJsonUrl = "https://raw.githubusercontent.com/StephGbzh/customta/master/data.json";
+    defaultJsonUrl = "https://raw.githubusercontent.com/StephGbzh/customta/master/data/search_engines.json";
 }
 
 fetch(defaultJsonUrl).then(function (response) {
